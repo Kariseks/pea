@@ -15,7 +15,7 @@ public:
     Array(std::size_t n);
     ~Array();
     Array(const Array & org) = delete;    //nie ma kopiowania
-    Array(Array && org);
+    Array(Array && org) noexcept;
 public:
     Array & operator=(const Array &org);
     Array & operator=(Array && org);

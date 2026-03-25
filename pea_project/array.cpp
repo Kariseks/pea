@@ -17,7 +17,7 @@ Array::~Array()
     }
 }
 
-Array::Array(Array && org)
+Array::Array(Array && org) noexcept
 {
     //taking resources over
     size = org.size;
@@ -29,7 +29,7 @@ Array::Array(Array && org)
 
 }
 //======================================================================================================================
-Array & Array::operator=(Array &org)
+Array & Array::operator=(const Array &org)
 {
     if(&org != this ){
         delete[] data_ptr;
@@ -37,7 +37,7 @@ Array & Array::operator=(Array &org)
         size = org.size;
         data_ptr = new T[size*size];
 
-        for(size_t i=0; i < size; ++i)
+        for(size_t i=0; i < size*size; ++i)
             data_ptr[i] = org.data_ptr[i];
     }
     return *this;
@@ -47,8 +47,7 @@ Array &Array::operator=(Array && org)
 {
     if(&org != this ){
         //preparing myself
-        if(data_ptr)
-            delete[] data_ptr;
+        delete[] data_ptr;
         //taking resources over
         size = org.size;
         data_ptr = org.data_ptr;
@@ -60,11 +59,11 @@ Array &Array::operator=(Array && org)
     return *this;
 }
 //======================================================================================================================
-T Array::get(std::size_t row, std::size_t col) { return data_ptr[row*size + col]; }
+const T Array::get(std::size_t row, std::size_t col) { return data_ptr[row*size + col]; }
 
 void Array::set(T value, std::size_t row, std::size_t col){ (*this)[row][col] = value;}
 
-std::size_t Array::getSize(){ return size; }
+const size_t Array::getSize(){ return size; }
 
 T * Array::operator[](std::size_t row){ return (data_ptr + size * row);}
 
