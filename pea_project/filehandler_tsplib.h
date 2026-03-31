@@ -25,7 +25,7 @@ public:
     static bool writeOptTour(const std::string& filename, const int* tour, int n, long long cost);
 
     void saveResult(const std::string& algoName, std::size_t size, double cpuTime, const Result& result, int how_optimal) const;
-    bool saveResult(const std::string& algoName, std::size_t size, double cpuTime, const Result& result) const;
+    bool saveResult(const std::string &algoName, const std::string& filename, std::size_t size, double cpuTime, const Result& result) const;
 };
 
 } // end of namespace pea

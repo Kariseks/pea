@@ -212,11 +212,8 @@ bool FileHandler_TSPLIB::writeOptTour(const std::string& filename, const int* to
     return true;
 }
 
-bool FileHandler_TSPLIB::saveResult(const std::string &algoName, std::size_t size, double cpuTime, const Result &result) const
+bool FileHandler_TSPLIB::saveResult(const std::string & algoName, const std::string & filename, std::size_t size, double cpuTime, const Result &result) const
 {
-    // 1. Dynamiczne tworzenie nazwy pliku: np. BruteForce_12.csv
-    std::string filename = algoName + "_" + std::to_string(size) + ".csv";
-
     // 2. Otwarcie pliku w trybie dopisywania (std::ios::app)
     // Jeśli plik nie istnieje, zostanie utworzony. Jeśli istnieje, nowa linia trafi na koniec.
     std::ofstream file(filename, std::ios::app);

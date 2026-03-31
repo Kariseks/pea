@@ -85,11 +85,14 @@ int main(int argc, char ** argv)
     AlgorithmRunner runner;
     bool completed_on_time = false;
 
-    runner.run_with_wall_timeout(std::chrono::minutes(maxTime), algorithm,array, result);
+    runner.run_with_wall_timeout(std::chrono::microseconds(maxTime), algorithm,array, result);
     //--------------------------------------------------------------------------
     //koniec czesci wyznaczania optymalnej trasy i kosztu
     //----- dopisanie/zapis wynikow testu do piku-----------------------------------------------------------------------------
-    fileHandler.saveResult(algoName, array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+    std::filesystem::path res_path_tmp(filePath);
+    auto resFileName = res_path_tmp.stem().string()+"_wyniki.csv";
+    //fileHandler.saveResult(algoName, resFileName, array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+    fileHandler.saveResult(algoName, "wyniki.csv", array.getSize(), runner.getFinal_cpu_time_in_s(), result);
     return 0;
 
     //----- zapis optymalnej scizeki i kosztu do pliku ----------------------------------------------------------------

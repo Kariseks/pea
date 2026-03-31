@@ -4,7 +4,7 @@
 PROGRAM="../pea_project/build/Desktop_Qt_6_10_0-release/pea_project"
 MAX_TIME=10
 ALGO_ID=1
-REPETITIONS=3
+REPETITIONS=5
 MODE=0
 IN_FILE_PATH='./generowane/'
 
@@ -21,7 +21,7 @@ echo "--- Wykryto rdzeni: $CPU_CORES. Używam wątków: $THREADS ---"
 TEMP_COMMANDS="tasks.tmp"
 > "$TEMP_COMMANDS"
 
-for x in {5..13}
+for x in {14..14}
 do
     FILE="${IN_FILE_PATH}/${x}.atsp"
     if [ -f "$FILE" ]; then
@@ -46,3 +46,4 @@ xargs -P $THREADS -I {} sh -c "{}" < "$TEMP_COMMANDS"
 rm "$TEMP_COMMANDS"
 
 echo -e "\n--- Wszystkie testy zakończone! ---"
+speaker-test -t sine -f 800 -l 1 & sleep 0.5 && kill -9 $! >> /dev/null

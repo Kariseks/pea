@@ -8,6 +8,7 @@
 \usepackage{amsfonts}             % Czcionki matematyczne
 \usepackage{amssymb}              % Symbole matematyczne (np. nieskończoność)
 \usepackage{geometry}             % Ustawienia marginesów
+\usepackage{csvsimple}
 \geometry{
 	a4paper,
 	left=2.5cm,
@@ -182,5 +183,141 @@
 	\vspace{1em}
 	\noindent\textbf{5. Analiza parametryczna algorytmów:} \\
 	W przypadku algorytmu w pełni losowego (RAND), zbadana zostanie krzywa poprawy jakości wyznaczonej ścieżki (spadek błędu względnego $\delta$) w funkcji zadanego z góry reżimu czasowego. Analiza odpowie na pytanie, czy dwukrotne lub dziesięciokrotne zwiększenie budżetu czasowego wpłynie na optymalizację trasy. Wyniki eksperymentów zostaną zwizualizowane za pomocą dedykowanych wykresów liniowych i słupkowych.
+	
+	
+	
+%	\section{Wyniki pomiarow}
+%	
+%
+%	
+%	% w miejscu gdzie chcesz tabelę:
+%	\begin{table}[ht]
+%		\centering
+%		\csvautotabular{rys/tabela_dokladnosci.csv}
+%		\caption{Średnia dokładność poszczególnych algorytmów.}
+%	\end{table}
+	
+	
+\section{Wyniki pomiarów i analiza}
+
+W niniejszym rozdziale zaprezentowano zestawienie wyników eksperymentów przeprowadzonych dla zaimplementowanych algorytmów. Pomiary podzielono na analizę złożoności czasowej oraz ocenę dokładności wyznaczanych tras (odchylenie od optimum).
+
+\subsection{Analiza czasów wykonania}
+
+W pierwszej kolejności zbadano czas wykonania algorytmu przeglądu zupełnego (Brute-Force) w zależności od rozmiaru instancji $N$. Wyniki wizualizuje Rysunek \ref{fig:bf_czas}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/brute_force_czas_vs_n.pdf}
+	\caption{Czas obliczeń algorytmu Brute-Force w funkcji rozmiaru instancji $N$.}
+	\label{fig:bf_czas}
+\end{figure}
+
+Jak można zauważyć na powyższym wykresie, czas wykonania przeglądu zupełnego rośnie w sposób drastyczny. Potwierdza to teoretyczną złożoność $O(N!)$. Dla małych wartości $N$ (np. od 5 do 10) czas jest ułamkiem sekundy, jednak po przekroczeniu pewnego progu krzywa staje się niemal pionowa, co czyni ten algorytm nieużytecznym dla większych problemów.
+
+Zupełnie inaczej prezentuje się charakterystyka algorytmów zachłannych (Nearest Neighbour oraz Repetitive Nearest Neighbour), co przedstawiono na Rysunku \ref{fig:nn_rnn_czas}.
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{rys/czas_nn_rnn_vs_n.pdf}
+%	\caption{Porównanie czasu obliczeń algorytmów heurystycznych NN i RNN.}
+%	\label{fig:nn_rnn_czas}
+%\end{figure}
+
+Czasy wykonania obu heurystyk rosną wielomianowo, co pozwala na rozwiązywanie instancji o wiele większych niż w przypadku algorytmu dokładnego. Widać wyraźnie, że RNN, iterujący po każdym wierzchołku startowym, jest wolniejszy od klasycznego NN, jednak dla badanych wielkości $N \le 14$ czasy obu metod nadal pozostają na poziomie ułamków sekund. Szczegółowe wartości liczbowe dla algorytmów deterministycznych zebrano w Tabeli \ref{tab:czasy}.
+
+%\begin{table}[H]
+%	\centering
+%	\csvautotabular{rys/tabela_czasow.csv}
+%	\caption{Średni czas wykonania [s] dla poszczególnych algorytmów w zależności od rozmiaru instancji $N$.}
+%	\label{tab:czasy}
+%\end{table}
+
+\subsection{Analiza dokładności algorytmów heurystycznych}
+
+Kluczowym aspektem oceny heurystyk jest ich odchylenie od optymalnego kosztu trasy (dokładność). Na Rysunku \ref{fig:nn_rnn_dokladnosc} zestawiono średnią dokładność algorytmów NN oraz RNN z uwzględnieniem czasu ich działania. Dodatkowo naniesiono ciągłą linię reprezentującą uśrednione zachowanie algorytmu losowego (RAND) w początkowych mikrosekundach jego działania.
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{rys/dokladnosc_czas_avg_nn_rnn_z_rand.pdf}
+%	\caption{Zależność dokładności od czasu dla NN i RNN na tle początkowej fazy algorytmu RAND.}
+%	\label{fig:nn_rnn_dokladnosc}
+%\end{figure}
+
+Wykres ten demonstruje wyższość algorytmu RNN nad NN -- kosztem dłuższego (ale wciąż akceptowalnego) czasu obliczeń, RNN oferuje znacznie wyższą i bardziej stabilną dokładność. 
+
+Ze względu na stochastyczny charakter algorytmu Random Search, zbadano również rozrzut jego dokładności podczas pojedynczych pomiarów (Rysunek \ref{fig:rand_raw} oraz Rysunek \ref{fig:rand_box}).
+
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{rys/dokladnosc_czas_raw_rand.pdf}
+%	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla różnych rozmiarów $N$.}
+%	\label{fig:rand_raw}
+%\end{figure}
+%
+%\begin{figure}[H]
+%	\centering
+%	\includegraphics[width=0.8\textwidth]{rys/stabilnosc_rand.pdf}
+%	\caption{Wykres pudełkowy (Boxplot) ilustrujący stabilność wyników algorytmu RAND dla poszczególnych $N$.}
+%	\label{fig:rand_box}
+%\end{figure}
+
+Z powyższych wizualizacji wynika, że rozrzut wyników metody RAND jest ogromny. Dla najmniejszych instancji (np. $N=5$) losowe tasowanie często trafia w optimum (100\% dokładności). Jednak wraz ze wzrostem rozpiętości instancji, szansa na wylosowanie dobrej ścieżki maleje, a mediana dokładności (czerwona linia na wykresie pudełkowym) drastycznie spada.
+
+\subsection{Szczegółowa analiza agregacyjna algorytmu RAND}
+
+Aby dokładniej prześledzić wpływ czasu na ewolucję rozwiązania stochastycznego, dokonano próbkowania wyników algorytmu RAND na dwóch płaszczyznach czasowych: w skali mikro (pierwsze ułamki sekund) oraz makro (od kilku sekund do kilku minut).
+
+W Tabeli \ref{tab:rand_micro} zaprezentowano zachowanie algorytmu w przedziale od 10 do 50 mikrosekund. Z kolei Tabela \ref{tab:rand_macro} ukazuje średnią dokładność przy długotrwałym działaniu (agregacja co 5 sekund, a następnie co minutę).
+
+%%\begin{table}[H]
+%%	\centering
+%%	\resizebox{\textwidth}{!}{
+%%		\csvautotabular{rys/tabela_rand_micro.csv}
+%	}
+%	\caption{Dokładność algorytmu RAND [\%] w początkowej fazie działania (przedziały rzędu mikrosekund).}
+%	\label{tab:rand_micro}
+%\end{table}
+%
+%%\begin{table}[H]
+%%	\centering
+%%	\resizebox{\textwidth}{!}{
+%%		\csvautotabular{rys/tabela_rand_macro.csv}
+%%	}
+%%	\caption{Dokładność algorytmu RAND [\%] w długich przedziałach czasowych (od sekund do minut).}
+%%	\label{tab:rand_macro}
+%%\end{table}
+
+Dane te potwierdzają, że nadanie algorytmowi losowemu gigantycznego budżetu czasowego pozwala mu stopniowo odnajdywać coraz lepsze rozwiązania, jednak proces ten jest wysoce nieefektywny i nie gwarantuje zbieżności do globalnego optimum dla dużych $N$.
+
+% ---------------------------------------------------------------------------------------------------------------------
+
+\section{Podsumowanie i wnioski}
+
+Przeprowadzone eksperymenty oraz implementacja algorytmów dla Asymetrycznego Problemu Komiwojażera pozwalają na sformułowanie następujących wniosków końcowych:
+
+\begin{enumerate}
+	\item \textbf{Ograniczenia przeglądu zupełnego:} Algorytm Brute-Force, choć gwarantuje znalezienie absolutnego optimum, jest użyteczny wyłącznie dla najmniejszych instancji (do $N \approx 14$). Złożoność silniowa $O(N!)$ sprawia, że dołożenie choćby jednego miasta do grafu drastycznie (kilkunastokrotnie) wydłuża czas oczekiwania, deklasując tę metodę w zastosowaniach praktycznych.
+	
+	\item \textbf{Pułapki lokalne algorytmu Nearest Neighbour:} Zwykły algorytm najbliższego sąsiada (NN) wykazuje się znakomitym czasem wykonania $O(N^2)$. Jest w stanie obsłużyć potężne grafy w ułamku sekundy. Niestety, jego czysto zachłanna natura powoduje, że pod koniec wyznaczania trasy zmuszony jest do wyboru bardzo kosztownych krawędzi. Czyni to wygenerowane rozwiązanie dalekim od optimum.
+	
+	\item \textbf{Kompromis Repetitive Nearest Neighbour:} Zastosowanie nakładki w postaci uruchamiania metody zachłannej z każdego możliwego wierzchołka startowego (RNN) okazało się w tym eksperymencie najbardziej racjonalnym kompromisem. Czas działania $O(N^3)$ wciąż pozwala na błyskawiczne rozwiązywanie problemu w czasie polikardynalnym, a wyeliminowanie zjawiska ,,złego miasta startowego'' znacząco podnosi dokładność rozwiązania.
+	
+	\item \textbf{Nieefektywność ślepego losowania:} Metoda Random Search stanowi dobre tło porównawcze (baseline), jednak nie posiada żadnej wartości aplikacyjnej. W grafach rzędu $N > 10$ znalezienie w pełni optymalnej ścieżki wymagałoby niewyobrażalnego czasu. Co prawda, dokładność rośnie wraz z zadanym limitem czasu (co widać w analizie makro), jednak ten sam efekt algorytm RNN osiąga tysiące razy szybciej w sposób deterministyczny.
+\end{enumerate}
+
+Podsumowując, do rozwiązywania problemów klasy ATSP na dużą skalę w rzeczywistych warunkach niezbędne jest odrzucenie metod dokładnych na rzecz zaawansowanych algorytmów przybliżonych (np. metaheurystyk), których wstępną bazę może stanowić algorytm oparty na zasadzie Repetitive Nearest Neighbour.	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 \end{document}

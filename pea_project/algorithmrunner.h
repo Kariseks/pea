@@ -16,7 +16,7 @@
 class AlgorithmRunner {
 public:
     template <typename Callable, typename... Args>
-    void run_with_wall_timeout(std::chrono::minutes wall_timeout, Callable&& algorithm, Args&&... args) {
+    void run_with_wall_timeout(std::chrono::microseconds wall_timeout, Callable&& algorithm, Args&&... args) {
 
         std::mutex mtx;
         std::condition_variable cv;
