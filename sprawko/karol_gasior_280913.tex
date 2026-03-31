@@ -1,0 +1,186 @@
+\documentclass[12pt, a4paper]{article}
+
+% --- PREAMBUŁA (ustawienia dokumentu) ---
+\usepackage[utf8]{inputenc}       % Kodowanie znaków
+\usepackage[T1]{fontenc}          % Polskie znaki (ą, ć, ę, ł, ń, ó, ś, ź, ż)
+\usepackage[polish]{babel}        % Polskie reguły dzielenia wyrazów i nazwy (np. "Spis treści")
+\usepackage{amsmath}              % Pakiety matematyczne (niezbędne do macierzy)
+\usepackage{amsfonts}             % Czcionki matematyczne
+\usepackage{amssymb}              % Symbole matematyczne (np. nieskończoność)
+\usepackage{geometry}             % Ustawienia marginesów
+\geometry{
+	a4paper,
+	left=2.5cm,
+	right=2.5cm,
+	top=2.5cm,
+	bottom=2.5cm
+}
+\usepackage{indentfirst}          % Wcięcia w pierwszych akapitach
+\usepackage{hyperref}             % Aktywne odnośniki w dokumencie
+\usepackage{setspace}             % Interlinia
+\setstretch{1.35}                 % ZWIĘKSZONA INTERLINIA (ok. 1.5 linii)
+\setlength{\parskip}{0.5em}       % Dodatkowy odstęp między akapitami
+
+% --- DANE DO STRONY TYTUŁOWEJ ---
+\title{\textbf{Sprawozdanie z projektu nr 1 - PEA} \\ \large Asymetryczny Problem Komiwojażera (ATSP)}
+\author{Twoje Imię i Nazwisko / Nr albumu}
+\date{\today} 
+
+% --- POCZĄTEK WŁAŚCIWEGO DOKUMENTU ---
+\begin{document}
+	
+	\maketitle % Generuje tytuł, autora i datę
+	
+	\tableofcontents % Automatyczny spis treści
+	\newpage
+	
+	\section{Wstęp teoretyczny}
+	
+	\subsection{Sformułowanie problemu komiwojażera (TSP i ATSP)}
+	Problem komiwojażera (ang. \textit{Traveling Salesperson Problem}, TSP) to jedno z najważniejszych zagadnień optymalizacji kombinatorycznej oraz informatyki teoretycznej. W swojej klasycznej postaci problem ten można sformułować następująco: dany jest zbiór $N$ miast oraz odległości pomiędzy każdą parą z nich. Celem jest znalezienie najkrótszej możliwej trasy, która rozpoczyna się w dowolnym mieście, odwiedza dokładnie raz każde z pozostałych miast i powraca do miasta początkowego.
+	
+	W ujęciu teorii grafów, problem modelowany jest za pomocą pełnego grafu ważonego $G = (V, E)$, gdzie $V$ to zbiór wierzchołków (miast) o mocy $|V| = N$, a $E$ to zbiór krawędzi (połączeń między miastami). Każdej krawędzi $(i, j) \in E$ przypisana jest waga (koszt) $c_{ij} \geq 0$. Szukanym rozwiązaniem jest cykl Hamiltona o minimalnej sumie wag krawędzi.
+	
+	W niniejszym projekcie rozpatrywany jest wariant asymetryczny problemu komiwojażera (ang. \textit{Asymmetric Traveling Salesperson Problem}, ATSP). Oznacza to, że graf $G$ jest grafem skierowanym, a macierz kosztów przejść nie musi być symetryczna, czyli w ogólnym przypadku zachodzi:
+	$$ c_{ij} \neq c_{ji} \quad \text{dla} \quad i, j \in V $$
+	Asymetria ta sprawia, że problem jest jeszcze trudniejszy do rozwiązania w optymalnym czasie. Ścieżka optymalna w jedną stronę może mieć zupełnie inny koszt (lub być wręcz niemożliwa ze względu na koszty dążące do nieskończoności) przy próbie jej odwrócenia. Problem ATSP należy do klasy problemów NP-trudnych, co oznacza, że nie jest znany żaden algorytm zdolny do znalezienia optymalnego rozwiązania w czasie wielomianowym dla każdego przypadku testowego.
+	
+	\subsection{Analiza i złożoność implementowanych algorytmów}
+	W ramach prac projektowych zaimplementowano i zbadano cztery zróżnicowane podejścia algorytmiczne do problemu ATSP:
+	
+	\subsubsection{Przegląd zupełny (Brute-Force)}
+	Algorytm przeglądu zupełnego to metoda dokładna, gwarantująca odnalezienie globalnego optimum. Jego działanie polega na wygenerowaniu przestrzeni wszystkich możliwych rozwiązań (cykli Hamiltona), obliczeniu funkcji celu (kosztu całkowitego) dla każdej z nich i wybraniu wartości minimalnej. 
+	
+	Z uwagi na fakt, że poszukiwany jest cykl, punkt startowy nie ma znaczenia dla ostatecznego kosztu całej trasy. Dlatego w zaimplementowanym algorytmie wierzchołek początkowy (miasto o indeksie $0$) jest na stałe ,,zamrożony'' na pierwszej pozycji. Pozwala to na zredukowanie liczby permutacji do wygenerowania z $N!$ do $(N-1)!$. 
+	Całkowita złożoność obliczeniowa tego podejścia wynosi $O(N!)$. Złożoność silniowa rośnie w tak drastycznym tempie, że już dla stosunkowo niewielkich wartości $N$ (np. $N > 13$) czas potrzebny na wygenerowanie i sprawdzenie wszystkich tras przekracza możliwości współczesnych jednostek obliczeniowych w akceptowalnym czasie ludzkim.
+	
+	\subsubsection{Algorytm losowy (Random Search)}
+	Algorytm losowy należy do grupy metod stochastycznych (probabilistycznych). Zamiast systematycznie przeszukiwać przestrzeń rozwiązań, algorytm ten w sposób ciągły losuje permutacje ścieżek i oblicza ich koszty, zachowując w pamięci tę, która do tej pory charakteryzowała się najmniejszą wagą sumaryczną. Nie jest to algorytm heurystyczny, gdyż nie wykorzystuje żadnej logiki problemu do kierowania swoimi decyzjami – opiera się wyłącznie na ślepym losowaniu przestrzeni.
+	
+	Pojedyncza iteracja (wylosowanie permutacji i obliczenie kosztu trasy o długości $N$) kosztuje asymptotycznie $O(N)$. Całkowita złożoność jest ściśle uzależniona od warunku stopu, którym w tym przypadku jest nałożony limit czasu. Choć algorytm ten wykonuje ogromną liczbę prób w jednostce czasu, prawdopodobieństwo losowego ,,trafienia'' w optymalną trasę przy dużej liczbie wierzchołków jest bliskie zeru. Algorytm ten często stanowi dolną granicę jakości (ang. \textit{baseline}) w ocenie pozostałych metod.
+	
+	\subsubsection{Najbliższy sąsiad (Nearest Neighbour - NN)}
+	Jest to klasyczny algorytm zachłanny. Konstrukcja rozwiązania polega na wyborze wierzchołka startowego, a następnie, w każdym kolejnym kroku, dołączaniu do ścieżki tego spośród nieodwiedzonych wierzchołków, do którego koszt przejścia z obecnego węzła jest najmniejszy (lokalne optimum). 
+	
+	Decyzje podejmowane w każdym kroku są ostateczne (algorytm nie posiada mechanizmu nawrotów – ang. \textit{backtracking}). Z tego powodu algorytm NN często wpada w tzw. pułapki – zmuszony jest na samym końcu trasy do wybrania wyjątkowo kosztownych krawędzi zamykających cykl, co drastycznie pogarsza całkowity wynik.
+	Złożoność obliczeniowa to $O(N^2)$, ponieważ dla każdego z $N$ miast algorytm musi przeszukać listę do $N-1$ potencjalnych sąsiadów. Jest to metoda skrajnie szybka, generująca rozwiązania natychmiastowo nawet dla bardzo dużych instancji problemu.
+	
+	\subsubsection{Powtarzalny najbliższy sąsiad (Repetitive Nearest Neighbour - RNN)}
+	Jakość rozwiązania zwracanego przez zwykły algorytm NN jest silnie uzależniona od wyboru wierzchołka startowego – szczególnie w wariancie asymetrycznym macierzy. Aby zminimalizować to ryzyko, algorytm RNN uruchamia heurystykę Nearest Neighbour $N$ razy, za każdym razem inicjalizując trasę w innym wierzchołku. Po zebraniu $N$ różnych cykli, algorytm zwraca ten o najniższym koszcie. Złożoność czasowa wzrasta o jeden rząd wielkości do $O(N^3)$, co nadal plasuje go w kategorii algorytmów wielomianowych o bardzo wysokiej wydajności praktycznej.
+	
+	% ---------------------------------------------------------------------------------------------------------------------
+	
+	\section{Przykład praktyczny algorytmu Nearest Neighbour dla $N=3$}
+	
+	Dla lepszego zobrazowania mechaniki algorytmów zachłannych w przestrzeni asymetrycznej, przeanalizujmy działanie algorytmu Nearest Neighbour (NN) krok po kroku dla mikroskopijnej instancji problemu o rozmiarze $N=3$. Niech asymetryczna macierz kosztów przejść $M$ prezentuje się następująco:
+	$$ M = \begin{bmatrix} \infty & 10 & 15 \\ 5 & \infty & 9 \\ 6 & 12 & \infty \end{bmatrix} $$
+	Wartość $M[i][j]$ określa koszt jednokierunkowej podróży z miasta $i$ do miasta $j$. Na przekątnej znajdują się wartości $\infty$, uniemożliwiające podróż z danego miasta do niego samego.
+	
+	\textbf{Założenia początkowe:}
+	Algorytm wymusza miasto startowe na indeksie $0$.
+	
+	\textbf{Krok 1: Stan początkowy}
+	\begin{itemize}
+		\item Aktualne miasto: $0$.
+		\item Zbiór miast odwiedzonych: $V_{odwiedz} = \{0\}$.
+		\item Zbiór miast nieodwiedzonych: $V_{nieodwiedz} = \{1, 2\}$.
+		\item Aktualna ścieżka: $P = [0]$. Aktualny koszt całkowity: $C = 0$.
+	\end{itemize}
+	
+	\textbf{Krok 2: Poszukiwanie pierwszego sąsiada}
+	\begin{itemize}
+		\item Z miasta $0$ algorytm skanuje krawędzie prowadzące do wierzchołków z $V_{nieodwiedz}$.
+		\item Koszt podróży do miasta $1$: $M[0][1] = 10$.
+		\item Koszt podróży do miasta $2$: $M[0][2] = 15$.
+		\item Zgodnie z kryterium zachłannym, algorytm wybiera minimum lokalne: $\min(10, 15) = 10$. Wybrane zostaje miasto $1$.
+		\item Aktualizacja stanu: $V_{odwiedz} = \{0, 1\}$, $V_{nieodwiedz} = \{2\}$.
+		\item Aktualna ścieżka: $P = [0, 1]$. Aktualny koszt: $C = 0 + 10 = 10$.
+	\end{itemize}
+	
+	\textbf{Krok 3: Poszukiwanie drugiego sąsiada}
+	\begin{itemize}
+		\item Z miasta $1$ pozostał tylko jeden wierzchołek do odwiedzenia: zbiór $V_{nieodwiedz}$ zawiera jedynie element $2$.
+		\item Algorytm musi udać się do miasta $2$. Koszt podróży to: $M[1][2] = 9$.
+		\item Aktualizacja stanu: $V_{odwiedz} = \{0, 1, 2\}$, zbiór miast nieodwiedzonych jest pusty.
+		\item Aktualna ścieżka: $P = [0, 1, 2]$. Aktualny koszt: $C = 10 + 9 = 19$.
+	\end{itemize}
+	
+	\textbf{Krok 4: Zamknięcie cyklu Hamiltona}
+	\begin{itemize}
+		\item Aby poprawnie rozwiązać problem komiwojażera, trasę należy zakończyć powrotem z ostatniego miasta do wierzchołka startowego.
+		\item Koszt powrotu z miasta $2$ do miasta $0$ wynosi: $M[2][0] = 6$.
+		\item \textbf{Ostateczna ścieżka:} $P_{final} = [0, 1, 2, 0]$.
+		\item \textbf{Ostateczny koszt całkowity:} $C_{final} = 19 + 6 = 25$.
+	\end{itemize}
+	
+	% ---------------------------------------------------------------------------------------------------------------------
+	
+	\section{Opis implementacji algorytmów i zastosowanych struktur}
+	
+	Całość projektu została zaimplementowana w języku C++ z rygorystycznym zachowaniem paradygmatu programowania obiektowego. Aby spełnić założenia optymalnego zarządzania pamięcią, zrezygnowano ze statycznych tablic wielowymiarowych. Używane struktury danych są alokowane w pełni dynamicznie na stercie w zależności od żądanego rozmiaru badanej instancji $N$.
+	
+	\subsection{Kluczowe struktury danych i mechanizmy pomocnicze}
+	\begin{itemize}
+		\item \textbf{Klasa \texttt{Array}:} Autorska, obiektowa reprezentacja asymetrycznej macierzy kosztów. Wewnątrz alokuje ciągły blok pamięci, co optymalizuje proces prefetchingu przez pamięć podręczną procesora i minimalizuje błędy braku w pamięci (ang. \textit{cache misses}) podczas gęstego odpytywania w algorytmach o wysokiej złożoności. Udostępnia metody dostępowe takie jak \texttt{get(row, col)}.
+		\item \textbf{Klasa \texttt{Wektor}:} Dynamiczna tablica wskaźnikowa służąca do przechowywania permutacji miast (ścieżek) oraz flag odwiedzin w algorytmach zachłannych. Implementuje własne mechanizmy kopiowania (konstruktor kopiujący, operator przypisania) zapobiegające wyciekom pamięci.
+		\item \textbf{Struktura \texttt{Result}:} Pełni rolę kontenera transportowego dla wyników działania każdego z algorytmów. Posiada pole \texttt{cost} reprezentujące minimalną znalezioną odległość oraz obiekt \texttt{path} (typu \texttt{Wektor}) przechowujący poprawną kolejność wierzchołków.
+		\item \textbf{Zarządzanie czasem wykonania:} Wykorzystano wprowadzony w standardzie C++20 mechanizm \texttt{std::stop\_token}. Umożliwia on eleganckie i przede wszystkim w pełni bezpieczne z punktu widzenia wielowątkowości przerywanie działania nieskończonych pętli (jak w metodzie \texttt{tsp\_random}) lub pętli o potężnej liczbie iteracji (jak w metodzie \texttt{tsp\_brute\_force}) przez zewnętrzny kontroler czasu, eliminując potrzebę inwazyjnego odpytywania funkcji systemowych o aktualny czas wewnątrz najbardziej wrażliwych bloków obliczeniowych.
+	\end{itemize}
+	
+	\subsection{Implementacja przeglądu zupełnego (Brute-Force)}
+	Sercem algorytmu dokladnego jest funkcja \texttt{tsp\_brute\_force}. Pętla poszukująca optymalnego rozwiązania została oparta o konstrukcję \texttt{do-while}. Fundamentalnym problemem optymalizacyjnym jest tu generowanie permutacji. Zrezygnowano z bibliotecznej funkcji \texttt{std::next\_permutation} na rzecz implementacji własnej metody \texttt{nastepna\_permutacja} operującej na autorskiej klasie \texttt{Wektor}.
+	
+	Algorytm generowania permutacji opiera się na porządku leksykograficznym i składa się z następujących kroków:
+	\begin{enumerate}
+		\item Poszukiwanie od końca (od prawej do lewej) pierwszego takiego indeksu $i$, dla którego zachodzi $w[i] < w[i+1]$. Jeśli taki indeks nie istnieje, wygenerowano już wszystkie możliwe układy.
+		\item Poszukiwanie od końca pierwszego indeksu $j$, dla którego $w[j] > w[i]$.
+		\item Zamiana wartości pod indeksami $i$ oraz $j$ (\texttt{std::swap}).
+		\item Odwrócenie kolejności elementów na prawo od indeksu $i$ (od $i+1$ do końca) za pomocą pomocniczej metody \texttt{odworoc\_wektor}.
+	\end{enumerate}
+	Co niezwykle istotne, implementacja ta ignoruje indeks $0$ wektora ścieżki. Złożoność $(N-1)!$ uzyskuje się poprzez zablokowanie pierwszego miasta i permutowanie zbioru wierzchołków od indeksu $1$ do $N-1$. 
+	
+	\subsection{Implementacja algorytmu losowego}
+	Funkcja \texttt{tsp\_random} ma za zadanie działać nieprzerwanie aż do momentu zgłoszenia żądania zatrzymania przez \texttt{std::stop\_token}. Za generowanie pseudolosowości odpowiada wysoce wydajny generator Mersenne Twister (\texttt{std::mt19937}), inicjalizowany za pomocą ziarna pochodzącego z entropii sprzętowej systemu (\texttt{std::random\_device}).
+	
+	Do tasowania miast wykorzystano klasyczny i optymalny algorytm Fishera-Yatesa, zaimplementowany wewnątrz głównej pętli \texttt{while(true)}. Złożoność pojedynczego przetasowania wynosi $O(N)$. Podobnie jak w przeglądzie zupełnym, tasowaniu podlega wyłączone sub-pasmo wektora od indeksu $1$ do $N-1$, ponieważ miasto startowe musi pozostać niezmienione. Po każdym przetasowaniu następuje ewaluacja wagi grafu i ewentualne nadpisanie struktury \texttt{out\_result}.
+	
+	\subsection{Implementacja algorytmów zachłannych (NN oraz RNN)}
+	Główna logika Nearest Neighbour znajduje się w wydzielonej metodzie \texttt{tsp\_nn\_wew}. 
+	Stan algorytmu śledzony jest przy użyciu wektora \texttt{visited}, zainicjowanego zerami. Algorytm wymusza $N-1$ kroków iteracyjnych. W każdym z nich wewnętrzna pętla analizuje wszystkie $N$ kolumn macierzy kosztów. Instrukcja warunkowa \texttt{if (visited[i] == 0)} stanowi swoisty filtr, dzięki któremu obliczenia i weryfikacja minimum (\texttt{dist < min\_dist}) odbywają się wyłącznie dla wierzchołków dotychczas nieeksplorowanych. Złożona w ten sposób trasa wytycza ścieżkę do przedostatniego węzła. Wartość kosztu uzupełniana jest o wagę krawędzi powrotnej na zewnątrz głównej pętli iteracyjnej.
+	
+	Rozszerzenie RNN (\texttt{tsp\_rnn}) implementuje pętlę inkrementującą parametr \texttt{start\_city} od $0$ do $N-1$. W każdej iteracji stan wewnętrzny odwiedzin jest resetowany i następuje kompletne uruchomienie logiki Nearest Neighbour opierające się na wybranym \texttt{start\_city}. Wyniki poszczególnych wywołań są agregowane, a program zwraca globalne minimum z tego konkretnego zbioru prób.
+	
+	% ---------------------------------------------------------------------------------------------------------------------
+	
+	\section{Plan i metodologia eksperymentów}
+	
+	Aby ocenić skuteczność, poprawność oraz efektywność czasową zaimplementowanych algorytmów w sposób empiryczny i rygorystyczny, zaplanowano następujący scenariusz badawczy:
+	
+	\vspace{1em}
+	\noindent\textbf{1. Konfiguracja środowiska testowego i mechanika pomiarów:} \\
+	Wszystkie testy wykonane zostaną na spójnym środowisku sprzętowym, aby zagwarantować powtarzalność i porównywalność wyników. W środowisku programistycznym Qt Creator program przed wykonaniem testów wydajnościowych zostanie skompilowany w docelowej konfiguracji \textbf{Release}. Krok ten jest kluczowy do uruchomienia flag i optymalizacji kompilatora, co gwarantuje miarodajność wyników pomiaru czasu dla złożonych obliczeń. Pomiary będą dokonywane z wykorzystaniem biblioteki \texttt{<chrono>} za pomocą wysokiej rozdzielczości zegara monotonicznego \texttt{high\_resolution\_clock}. 
+	
+	\vspace{1em}
+	\noindent\textbf{2. Struktura danych wejściowych i próbkowanie uśredniające:} \\
+	Pomiary przeprowadzone zostaną dla instancji problemów wczytywanych z plików tekstowych oraz losowo generowanych instancji. Zgodnie z wymaganiami projektowymi, testy obejmą minimum 7 zróżnicowanych, reprezentatywnych wielkości problemu $N$. Z uwagi na radykalnie różne klasy złożoności, wartości $N$ będą dobierane osobno:
+	\begin{itemize}
+		\item \textbf{Dla Brute-Force:} Oczekiwane skale problemu to wartości niewielkie, na których funkcja silni wykazuje dramatyczny przyrost czasu, np. $N \in \{5, 8, 10, 11, 12, 13, 14\}$.
+		\item \textbf{Dla algorytmów przybliżonych (RAND, NN, RNN):} Ponieważ są to metody z czasem wielomianowym bądź stochastycznym, pomiary czasu przyjmą wielokrotnie wyższe pułapy instancji wejściowych, np. $N \in \{10, 50, 100, 250, 500, 750, 1000, 2500\}$.
+	\end{itemize}
+	W celu zniwelowania błędu pomiarowego wynikającego z ingerencji systemu operacyjnego, dla danego rozmiaru $N$ test wydajnościowy zostanie zwielokrotniony (wykonany dla różnych wygenerowanych map o danym rozmiarze lub w pętli dla jednej instancji), a do finalnego sprawozdania trafią wyłącznie wartości uśrednione.
+	
+	\vspace{1em}
+	\noindent\textbf{3. Poszukiwanie granicy wykonania w ,rozsądnym czasie'':} \\
+	Ważnym punktem eksperymentu będzie wyznaczenie dla każdej z czterech metod maksymalnego rozmiaru instancji grafu wejściowego $N_{max}$, dla którego program jest w stanie zwrócić kompletne rozwiązanie w założonym ,,rozsądnym czasie'', który zdefiniowano na przedział od 10 do 30 minut. Doświadczenie to ukaże barierę skalowalności metod dokładnych.
+	
+	\vspace{1em}
+	\noindent\textbf{4. Ewaluacja błędu względnego rozwiązań aproksymowanych:} \\
+	Z racji faktu, iż algorytmy RAND, NN oraz RNN nie gwarantują odnalezienia rozwiązania najkrótszego w grafie, obliczona zostanie metryka błędu względnego $\delta$. Wzór wykorzystywany w analizie jakościowej:
+	$$ \delta = \frac{C_{heur} - C_{opt}}{C_{opt}} \cdot 100\% $$
+	gdzie $C_{heur}$ to całkowity koszt ścieżki wyznaczony przez dany algorytm przybliżony, natomiast $C_{opt}$ to globalne optymalne rozwiązanie (pozyskane z analizy dokonanej za pomocą przeglądu zupełnego lub podane jako pewnik pochodzący z ogólnodostępnych baz).
+	
+	\vspace{1em}
+	\noindent\textbf{5. Analiza parametryczna algorytmów:} \\
+	W przypadku algorytmu w pełni losowego (RAND), zbadana zostanie krzywa poprawy jakości wyznaczonej ścieżki (spadek błędu względnego $\delta$) w funkcji zadanego z góry reżimu czasowego. Analiza odpowie na pytanie, czy dwukrotne lub dziesięciokrotne zwiększenie budżetu czasowego wpłynie na optymalizację trasy. Wyniki eksperymentów zostaną zwizualizowane za pomocą dedykowanych wykresów liniowych i słupkowych.
+	
+\end{document}

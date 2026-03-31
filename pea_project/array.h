@@ -20,7 +20,7 @@ public:
     Array & operator=(const Array &org);
     Array & operator=(Array && org);
 public:
-    const T get(std::size_t row, std::size_t col);
+     T get(std::size_t row, std::size_t col) const;
     void set(T value, std::size_t row, std::size_t col);
     const std::size_t getSize();
     T* operator[](std::size_t row);

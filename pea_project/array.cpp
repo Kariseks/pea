@@ -29,7 +29,7 @@ Array::Array(Array && org) noexcept
 
 }
 //======================================================================================================================
-Array & Array::operator=(const Array &org)
+Array & Array::operator=(const Array & org)
 {
     if(&org != this ){
         delete[] data_ptr;
@@ -59,7 +59,7 @@ Array &Array::operator=(Array && org)
     return *this;
 }
 //======================================================================================================================
-const T Array::get(std::size_t row, std::size_t col) { return data_ptr[row*size + col]; }
+T Array::get(std::size_t row, std::size_t col) const { return data_ptr[row*size + col]; }
 
 void Array::set(T value, std::size_t row, std::size_t col){ (*this)[row][col] = value;}
 

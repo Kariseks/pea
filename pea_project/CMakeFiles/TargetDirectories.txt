@@ -1,0 +1,7 @@
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/pea_project.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/edit_cache.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/rebuild_cache.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/list_install_components.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/install.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/install/local.dir
+/home/karol/Desktop/semestr 6 /PEA/etap 1/pea_project/CMakeFiles/install/strip.dir

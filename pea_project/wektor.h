@@ -2,6 +2,7 @@
 #define WEKTOR_H
 
 #include <initializer_list>
+#include <ostream>
 using T = int;
 class Wektor
 {
@@ -14,9 +15,11 @@ public:
     Wektor(Wektor && org) noexcept;
     Wektor & operator=(const Wektor & org);
     Wektor & operator=(Wektor && org);
+    bool operator==(const Wektor & org) const;
 
     ~Wektor();
 public:
+    friend std::ostream& operator<<(std::ostream& os, const Wektor& vec);
     T & operator[](std::size_t idx);
     bool push_back(const T &elem);
 public:

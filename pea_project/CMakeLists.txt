@@ -10,7 +10,9 @@ add_executable(pea_project main.cpp
     filehandler_tsplib.h filehandler_tsplib.cpp
     algorithmrunner.h algorithmrunner.cpp
     Result.h
-    wektor.h wektor.cpp)
+    wektor.h wektor.cpp
+    parser.h parser.cpp
+    nic.h nic.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS pea_project

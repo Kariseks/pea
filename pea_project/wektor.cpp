@@ -54,6 +54,22 @@ Wektor & Wektor::operator=(const Wektor & org)
     }
     return *this;
 }
+
+bool Wektor::operator==(const Wektor &org) const
+{
+    if(this == &org)
+        return true;
+    if(size != org.size)
+        return false;
+    if(org.data_ptr == nullptr)
+        return false;
+
+    for(std::size_t i=0; i<size; ++i)
+        if(data_ptr[i] != org.data_ptr[i])
+            return false;
+
+    return true;
+}
 Wektor &Wektor::operator=(Wektor && org)
 {
     if(this != &org)
@@ -120,3 +136,16 @@ std::size_t Wektor::growPolicy()
     return capacity * growFactor;
 }
 
+
+std::ostream& operator<<(std::ostream& os, const Wektor& vec) {
+    if (vec.size == 0) {
+        os << "[Pusta sciezka]";
+        return os;
+    }
+
+    for (std::size_t i = 0; i < vec.size; ++i) {
+        os << vec.data_ptr[i] << endl;
+    }
+
+    return os;
+}
