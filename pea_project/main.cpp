@@ -44,81 +44,151 @@ bool verifyVisited(const Result & result)
 //=====================================================================================================================
 int main(int argc, char ** argv)
 {
-    //----- parsowanie  ---------------
-    Parser parser;
-    auto isParsed = parser.parse(argc, argv);
-    if (!isParsed){
-        cout << "Blad parsowania" << endl;
-        return 1;
-    }
-
-    auto algoId  = parser.getAlgorithmId();
-    auto filePath  = parser.getFilePath();
-    auto maxTime  = parser.getMaxTime();
-    auto mode = parser.getMode();
-    auto algorithm = (algoId == 1) ? tsp_brute_force:
-                         (algoId == 2) ? tsp_random :
-                         (algoId == 3) ? tsp_nn :
-                        (algoId == 4) ? tsp_rnn :
-                                tsp_brute_force;
-
-    auto algoName = (algoId == 1) ? "brute_force":
-                        (algoId == 2) ? "random" :
-                        (algoId == 3) ? "nn" :
-                        (algoId == 4) ? "rnn" :
-                         "brute_force";
-    //---- wczytywanie macierzy z pliku -----------------
-
-
-    pea::FileHandler_TSPLIB fileHandler;
-    auto data = fileHandler.readATSP(filePath);
-    if(data == nullptr)
+    if(argc >1)
     {
-        cout << "Nie wczytano macierzy koniec programu" << endl;
-        return 1;
+
+        //----- parsowanie  ---------------
+        Parser parser;
+        auto isParsed = parser.parse(argc, argv);
+        if (!isParsed){
+            cout << "Blad parsowania" << endl;
+            return 1;
+        }
+
+        auto algoId  = parser.getAlgorithmId();
+        auto filePath  = parser.getFilePath();
+        auto maxTime  = parser.getMaxTime();
+        auto mode = parser.getMode();
+        auto algorithm = (algoId == 1) ? tsp_brute_force:
+                             (algoId == 2) ? tsp_random :
+                             (algoId == 3) ? tsp_nn :
+                            (algoId == 4) ? tsp_rnn :
+                                    tsp_brute_force;
+
+        auto algoName = (algoId == 1) ? "brute_force":
+                            (algoId == 2) ? "random" :
+                            (algoId == 3) ? "nn" :
+                            (algoId == 4) ? "rnn" :
+                             "brute_force";
+        //---- wczytywanie macierzy z pliku -----------------
+
+
+        pea::FileHandler_TSPLIB fileHandler;
+        auto data = fileHandler.readATSP(filePath);
+        if(data == nullptr)
+        {
+            cout << "Nie wczytano macierzy koniec programu" << endl;
+            return 1;
+        }
+
+
+        auto array = Array{std::move(*data)};
+        Result result;
+
+        AlgorithmRunner runner;
+        bool completed_on_time = false;
+
+        runner.run_with_wall_timeout(std::chrono::seconds(maxTime), algorithm,array, result);
+        //--------------------------------------------------------------------------
+        //koniec czesci wyznaczania optymalnej trasy i kosztu
+        //----- dopisanie/zapis wynikow testu do piku-----------------------------------------------------------------------------
+        std::filesystem::path res_path_tmp(filePath);
+        auto resFileName = res_path_tmp.stem().string()+"_wyniki.csv";
+        //fileHandler.saveResult(algoName, resFileName, array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+        fileHandler.saveResult(algoName, "wyniki.csv", array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+
     }
+    else
+    {
+
+        cout << "Wybierz algorytm (podaj liczbę całkowitą): "<<endl
+             << "\t1-brute force" << endl
+             << "\t2-random"    << endl
+             << "\t3-najbliższy sąsiad"  << endl
+             << "\t3-najbliższy sąsiad z powtarzaniem" << endl
+             << "algoId:= ";
+         int algoId;
+        cin >> algoId;
+                cout << endl;
+
+        auto algorithm = (algoId == 1) ? tsp_brute_force:
+              (algoId == 2) ? tsp_random :
+              (algoId == 3) ? tsp_nn :
+              (algoId == 4) ? tsp_rnn :
+              tsp_brute_force;
+        auto algoName = (algoId == 1) ? "brute_force":
+                            (algoId == 2) ? "random" :
+                            (algoId == 3) ? "nn" :
+                            (algoId == 4) ? "rnn" :
+                            "brute_force";
 
 
-    auto array = Array{std::move(*data)};
-    Result result;
+        int maxTime;
+        cout << "Wpisz ograniczenie czasowe algorytmu w sekundach\n\tmaks czas:= ";
+        cin >> maxTime;
+        cout << endl;
 
-    AlgorithmRunner runner;
-    bool completed_on_time = false;
-
-    runner.run_with_wall_timeout(std::chrono::microseconds(maxTime), algorithm,array, result);
-    //--------------------------------------------------------------------------
-    //koniec czesci wyznaczania optymalnej trasy i kosztu
-    //----- dopisanie/zapis wynikow testu do piku-----------------------------------------------------------------------------
-    std::filesystem::path res_path_tmp(filePath);
-    auto resFileName = res_path_tmp.stem().string()+"_wyniki.csv";
-    //fileHandler.saveResult(algoName, resFileName, array.getSize(), runner.getFinal_cpu_time_in_s(), result);
-    fileHandler.saveResult(algoName, "wyniki.csv", array.getSize(), runner.getFinal_cpu_time_in_s(), result);
-    return 0;
-
-    //----- zapis optymalnej scizeki i kosztu do pliku ----------------------------------------------------------------
-    std::filesystem::path path_tmp(filePath);
-    auto outFileName = path_tmp.stem().string()+"_" + algoName + ".opt.tour";
-
-    //----- -----------------------------------------------
+        string filePath;
+        cout << "Wskaż ścieżkę do pliku z danymi\n\tścieżka:= ";
+        cin >> filePath;
+        cout << endl;
 
 
-    auto opt_tour_path = std::to_string(array.getSize()) + ".opt.tour";
-    auto how_optimal = howOptimal(opt_tour_path, result, array);
 
-    if(mode)
+        //---- wczytywanie macierzy z pliku -----------------
+
+
+        pea::FileHandler_TSPLIB fileHandler;
+        auto data = fileHandler.readATSP(filePath);
+        if(data == nullptr)
+        {
+            cout << "Nie wczytano macierzy koniec programu" << endl;
+            return 1;
+        }
+
+
+        auto array = Array{std::move(*data)};
+        Result result;
+
+        AlgorithmRunner runner;
+        bool completed_on_time = false;
+
+        runner.run_with_wall_timeout(std::chrono::seconds(maxTime), algorithm,array, result);
+        //--------------------------------------------------------------------------
+        //koniec czesci wyznaczania optymalnej trasy i kosztu
+        //----- dopisanie/zapis wynikow testu do piku-----------------------------------------------------------------------------
+        std::filesystem::path res_path_tmp(filePath);
+        auto resFileName = res_path_tmp.stem().string()+"_wyniki.csv";
+        //fileHandler.saveResult(algoName, resFileName, array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+        fileHandler.saveResult(algoName, "wyniki.csv", array.getSize(), runner.getFinal_cpu_time_in_s(), result);
+
+
+        //----- zapis optymalnej scizeki i kosztu do pliku ----------------------------------------------------------------
+        std::filesystem::path path_tmp(filePath);
+        auto outFileName = path_tmp.stem().string()+"_" + algoName + ".opt.tour";
+        //----- -----------------------------------------------
+
+        auto opt_tour_path = std::to_string(array.getSize()) + ".opt.tour";
+        auto how_optimal = howOptimal(opt_tour_path, result, array);
+
+
+        cout << "Koszt: " << result.cost << endl;
+        cout << "Czas: " << runner.getFinal_cpu_time_in_s() << " sekund" << endl;
+        cout << result.path << endl;
+
+    }
+    /*
+    if(mode == 2)
     {
         Wektor path{1};
         auto successfull = FileHandler_TSPLIB::readOptTourSequence(opt_tour_path, path);
         if(!successfull)
             cout << "" << endl;
-         auto is_verified = verifyOptimum(opt_tour_path, result);
+        auto is_verified = verifyOptimum(opt_tour_path, result);
         string output_res = "nieprawidlowy";
         if(is_verified)
             output_res = "prawidlowy";
         cout << algoName << " dla rozmiaru " << array.getSize() << " jest " << output_res << endl;
     }
-    cout << "Koszt: " << result.cost << endl;
-    cout << "Czas: " << runner.getFinal_cpu_time_in_s() << " sekund" << endl;
-    cout << result.path << endl;
-
+    */
 }

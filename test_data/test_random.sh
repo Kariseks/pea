@@ -2,11 +2,11 @@
 
 # 1. Konfiguracja
 PROGRAM="../pea_project/build/Desktop_Qt_6_10_0-release/pea_project"
-MIN_TIME=100000           # NOWE: Minimalny czas w sekundach
-MAX_TIME=10000000           # ZMIANA: Maksymalny czas (ustaw na ile potrzebujesz)
-KROK=100000
+MIN_TIME=1          # NOWE: Minimalny czas w sekundach
+MAX_TIME=120           # ZMIANA: Maksymalny czas (ustaw na ile potrzebujesz)
+KROK=1
 ALGO_ID=2
-REPETITIONS=1
+REPETITIONS=10
 MODE=0
 N_START=14
 N_STOP=14
@@ -25,12 +25,12 @@ echo "--- Wykryto rdzeni: $CPU_CORES. Używam wątków: $THREADS ---"
 TEMP_COMMANDS="tasks.tmp"
 > "$TEMP_COMMANDS"
 
-for x in $(seq $N_START $N_STOP )
+for x in $(seq $N_START  $N_STOP )
 do
     FILE="${IN_FILE_PATH}${x}.atsp"
     if [ -f "$FILE" ]; then
         # NOWE: Pętla iterująca po czasie od MIN_TIME do MAX_TIME (domyślnie krok to 1)
-        for CURRENT_TIME in $(seq $MIN_TIME $KROK $MAX_TIME)
+        for CURRENT_TIME in $(seq $MIN_TIME $MAX_TIME)
         do
             for i in $(seq 1 $REPETITIONS)
             do

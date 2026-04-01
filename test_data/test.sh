@@ -2,12 +2,13 @@
 
 # 1. Konfiguracja
 PROGRAM="../pea_project/build/Desktop_Qt_6_10_0-release/pea_project"
-MAX_TIME=10
-ALGO_ID=1
-REPETITIONS=5
+MAX_TIME=30
+ALGO_ID=4
+REPETITIONS=100
 MODE=0
 IN_FILE_PATH='./generowane/'
-
+N_START=5
+N_STOP=21
 
 # 2. Obliczanie liczby wątków (Liczba CPU - 2)
 CPU_CORES=$(nproc)
@@ -21,7 +22,7 @@ echo "--- Wykryto rdzeni: $CPU_CORES. Używam wątków: $THREADS ---"
 TEMP_COMMANDS="tasks.tmp"
 > "$TEMP_COMMANDS"
 
-for x in {14..14}
+for x in $(seq $N_START  $N_STOP )
 do
     FILE="${IN_FILE_PATH}/${x}.atsp"
     if [ -f "$FILE" ]; then

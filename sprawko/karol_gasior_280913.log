@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.25)  31 MAR 2026 23:11
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.1.25)  1 APR 2026 14:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -198,6 +198,119 @@ Package shellesc Info: Restricted shell escape enabled on input line 77.
 \c@csvcol=\count281
 \csv@out=\write3
 )
+(/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
+Package: float 2001/11/08 v1.3d Float enhancements (AL)
+\c@float@type=\count282
+\float@exts=\toks30
+\float@box=\box54
+\@float@everytoks=\toks31
+\@floatcapt=\box55
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2022/03/10 v1.4e Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2021/08/11 v1.11 sin cos tan (DPC)
+)
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: pdftex.def on input line 107.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-def/pdftex.def
+File: pdftex.def 2022/09/22 v1.2b Graphics/color driver for pdftex
+))
+\Gin@req@height=\dimen161
+\Gin@req@width=\dimen162
+)
+(/usr/share/texlive/texmf-dist/tex/latex/siunitx/siunitx.sty
+Package: siunitx 2024-01-25 v3.3.10 A comprehensive (SI) units package
+\l__siunitx_number_uncert_offset_int=\count283
+\l__siunitx_number_exponent_fixed_int=\count284
+\l__siunitx_number_min_decimal_int=\count285
+\l__siunitx_number_min_integer_int=\count286
+\l__siunitx_number_round_precision_int=\count287
+\l__siunitx_number_lower_threshold_int=\count288
+\l__siunitx_number_upper_threshold_int=\count289
+\l__siunitx_number_group_first_int=\count290
+\l__siunitx_number_group_size_int=\count291
+\l__siunitx_number_group_minimum_int=\count292
+\l__siunitx_angle_tmp_dim=\dimen163
+\l__siunitx_angle_marker_box=\box56
+\l__siunitx_angle_unit_box=\box57
+\l__siunitx_compound_count_int=\count293
+
+(/usr/share/texlive/texmf-dist/tex/latex/translations/translations.sty
+Package: translations 2022/02/05 v1.12 internationalization of LaTeX2e packages
+ (CN)
+
+(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+))
+\l__siunitx_table_tmp_box=\box58
+\l__siunitx_table_tmp_dim=\dimen164
+\l__siunitx_table_column_width_dim=\dimen165
+\l__siunitx_table_integer_box=\box59
+\l__siunitx_table_decimal_box=\box60
+\l__siunitx_table_uncert_box=\box61
+\l__siunitx_table_before_box=\box62
+\l__siunitx_table_after_box=\box63
+\l__siunitx_table_before_dim=\dimen166
+\l__siunitx_table_carry_dim=\dimen167
+\l__siunitx_unit_tmp_int=\count294
+\l__siunitx_unit_position_int=\count295
+\l__siunitx_unit_total_int=\count296
+
+(/usr/share/texlive/texmf-dist/tex/latex/tools/array.sty
+Package: array 2023/10/16 v2.5g Tabular extension package (FMi)
+\col@sep=\dimen168
+\ar@mcellbox=\box64
+\extrarowheight=\dimen169
+\NC@list=\toks32
+\extratabsurround=\skip53
+\backup@length=\skip54
+\ar@cellbox=\box65
+))
+(/usr/share/texlive/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+)
+(/usr/share/texlive/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen170
+\lightrulewidth=\dimen171
+\cmidrulewidth=\dimen172
+\belowrulesep=\dimen173
+\belowbottomsep=\dimen174
+\aboverulesep=\dimen175
+\abovetopsep=\dimen176
+\cmidrulesep=\dimen177
+\cmidrulekern=\dimen178
+\defaultaddspace=\dimen179
+\@cmidla=\count297
+\@cmidlb=\count298
+\@aboverulesep=\dimen180
+\@belowrulesep=\dimen181
+\@thisruleclass=\count299
+\@lastruleclass=\count300
+\@thisrulewidth=\dimen182
+)
+(/usr/share/texlive/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
+)
 (/usr/share/texlive/texmf-dist/tex/latex/tools/indentfirst.sty
 Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
 )
@@ -212,21 +325,7 @@ Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pdfescape/pdfescape.sty
 Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
-
-(/usr/share/texlive/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
-Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
 )
-(/usr/share/texlive/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
-Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO
-)
-
-(/usr/share/texlive/texmf-dist/tex/generic/infwarerr/infwarerr.sty
-Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
-)
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-Package pdftexcmds Info: \pdfdraftmode found.
-))
 (/usr/share/texlive/texmf-dist/tex/latex/hycolor/hycolor.sty
 Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
 )
@@ -245,11 +344,11 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/kvoptions/kvoptions.sty
 Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
 ))
-\c@section@level=\count282
+\c@section@level=\count301
 )
-\@linkdim=\dimen161
-\Hy@linkcounter=\count283
-\Hy@pagecounter=\count284
+\@linkdim=\dimen183
+\Hy@linkcounter=\count302
+\Hy@pagecounter=\count303
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/pd1enc.def
 File: pd1enc.def 2024-01-20 v7.01h Hyperref: PDFDocEncoding definition (HO)
@@ -259,7 +358,7 @@ Now handling font encoding PD1 ...
 (/usr/share/texlive/texmf-dist/tex/generic/intcalc/intcalc.sty
 Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
 )
-\Hy@SavedSpaceFactor=\count285
+\Hy@SavedSpaceFactor=\count304
 
 (/usr/share/texlive/texmf-dist/tex/latex/hyperref/puenc.def
 File: puenc.def 2024-01-20 v7.01h Hyperref: PDF Unicode definition (HO)
@@ -273,14 +372,14 @@ Package hyperref Info: Plain pages OFF on input line 4194.
 Package hyperref Info: Backreferencing OFF on input line 4199.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
 Package hyperref Info: Bookmarks ON on input line 4446.
-\c@Hy@tempcnt=\count286
+\c@Hy@tempcnt=\count305
 
 (/usr/share/texlive/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip17
 Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 )
 LaTeX Info: Redefining \url on input line 4784.
-\XeTeXLinkMargin=\dimen162
+\XeTeXLinkMargin=\dimen184
 
 (/usr/share/texlive/texmf-dist/tex/generic/bitset/bitset.sty
 Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
@@ -289,9 +388,9 @@ Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
 Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO
 )
 ))
-\Fld@menulength=\count287
-\Field@Width=\dimen163
-\Fld@charsize=\dimen164
+\Fld@menulength=\count306
+\Field@Width=\dimen185
+\Fld@charsize=\dimen186
 Package hyperref Info: Hyper figures OFF on input line 6063.
 Package hyperref Info: Link nesting OFF on input line 6068.
 Package hyperref Info: Hyper index ON on input line 6071.
@@ -304,9 +403,9 @@ Package hyperref Info: PDF/A mode OFF on input line 6093.
 Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
 package with kernel methods
 )
-\Hy@abspage=\count288
-\c@Item=\count289
-\c@Hfootnote=\count290
+\Hy@abspage=\count307
+\c@Item=\count308
+\c@Hfootnote=\count309
 )
 Package hyperref Info: Driver (autodetected): hpdftex.
 
@@ -318,8 +417,8 @@ Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend pac
 kage
 with kernel methods
 )
-\Fld@listcount=\count291
-\c@bookmark@seq@number=\count292
+\Fld@listcount=\count310
+\c@bookmark@seq@number=\count311
 
 (/usr/share/texlive/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
 Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
@@ -330,37 +429,46 @@ Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
 Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 2
 85.
 )
-\Hy@SectionHShift=\skip53
+\Hy@SectionHShift=\skip55
 )
 (/usr/share/texlive/texmf-dist/tex/latex/setspace/setspace.sty
 Package: setspace 2022/12/04 v6.7b set line spacing
 )
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/color.sty
+Package: color 2022/01/06 v1.3d Standard LaTeX Color (DPC)
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package color Info: Driver file: pdftex.def on input line 149.
+
+(/usr/share/texlive/texmf-dist/tex/latex/graphics/mathcolor.ltx))
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count293
-\l__pdf_internal_box=\box54
+\l__color_backend_stack_int=\count312
+\l__pdf_internal_box=\box66
 )
 (./karol_gasior_280913.aux)
 \openout1 = `karol_gasior_280913.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 31.
-LaTeX Font Info:    ... okay on input line 31.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -396,220 +504,177 @@ LaTeX Font Info:    ... okay on input line 31.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring OFF on input line 31.
-(./karol_gasior_280913.out) (./karol_gasior_280913.out)
+(/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count313
+\scratchdimen=\dimen187
+\scratchbox=\box67
+\nofMPsegments=\count314
+\nofMParguments=\count315
+\everyMPshowfont=\toks33
+\MPscratchCnt=\count316
+\MPscratchDim=\dimen188
+\MPnumerator=\count317
+\makeMPintoPDFobject=\count318
+\everyMPtoPDFconversion=\toks34
+) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
+Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
+Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
+85.
+
+(/usr/share/texlive/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+(/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
+nary-polish.trsl
+File: translations-basic-dictionary-polish.trsl (polish translation file `trans
+lations-basic-dictionary')
+)
+Package translations Info: loading dictionary `translations-basic-dictionary' f
+or `polish'. on input line 39.
+Package hyperref Info: Link coloring OFF on input line 39.
+ (./karol_gasior_280913.out) (./karol_gasior_280913.out)
 \@outlinefile=\write4
 \openout4 = `karol_gasior_280913.out'.
 
-LaTeX Font Info:    Trying to load font information for U+msa on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 42.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 34.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 42.
 
 
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
-)
-(./karol_gasior_280913.toc [1
+) [1
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
-dvips/cm-super/cm-super-t1.enc}])
+dvips/cm-super/cm-super-t1.enc}] (./karol_gasior_280913.toc)
 \tf@toc=\write5
 \openout5 = `karol_gasior_280913.toc'.
 
  [2] [3] [4]
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 74.
+(hyperref)                removing `math shift' on input line 82.
 
 
 Package hyperref Warning: Token not allowed in a PDF string (Unicode):
-(hyperref)                removing `math shift' on input line 74.
+(hyperref)                removing `math shift' on input line 82.
 
 [5]
-Overfull \hbox (11.63507pt too wide) in paragraph at lines 119--119
+Overfull \hbox (11.63507pt too wide) in paragraph at lines 127--127
 []\T1/cmr/bx/n/17.28 Opis im-ple-men-ta-cji al-go-ryt-mów i za-sto-so-wa-nych s
 truk-
  []
 
 [6{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-ts1.enc}]
 LaTeX Font Info:    Trying to load font information for T1+cmtt on input line 1
-25.
+33.
 
 (/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
 File: t1cmtt.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
 LaTeX Font Info:    Font shape `T1/cmtt/bx/n' in size <12> not available
-(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 125.
+(Font)              Font shape `T1/cmtt/m/n' tried instead on input line 133.
 
-Overfull \hbox (31.14127pt too wide) in paragraph at lines 132--133
+Overfull \hbox (31.14127pt too wide) in paragraph at lines 140--141
 \T1/cmr/m/n/12 funk-cji \T1/cmtt/m/n/12 std::next_permutation \T1/cmr/m/n/12 na
  rzecz im-ple-men-ta-cji wªa-snej me-tody \T1/cmtt/m/n/12 nastepna_permutacja
  []
 
 [7] [8]
-Overfull \hbox (5.76425pt too wide) in paragraph at lines 152--153
+Overfull \hbox (5.76425pt too wide) in paragraph at lines 160--161
 []\T1/cmr/m/n/12 Rozszerzenie RNN (\T1/cmtt/m/n/12 tsp_rnn\T1/cmr/m/n/12 ) im-p
 le-men-tuje p¦-tl¦ in-kre-men-tu-j¡c¡ pa-ra-metr \T1/cmtt/m/n/12 start_city
  []
 
-[9]
-Overfull \hbox (0.66438pt too wide) in paragraph at lines 169--170
-\T1/cmr/m/n/12 wy»-sze pu-ªapy in-stan-cji wej-±cio-wych, np. $\OML/cmm/m/it/12
- N \OMS/cmsy/m/n/12 2 f\OT1/cmr/m/n/12 10\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 50\
-OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 100\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 250\OML
-/cmm/m/it/12 ; \OT1/cmr/m/n/12 500\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 750\OML/cm
-m/m/it/12 ; \OT1/cmr/m/n/12 1000\OML/cmm/m/it/12 ; \OT1/cmr/m/n/12 2500\OMS/cms
-y/m/n/12 g$\T1/cmr/m/n/12 . 
- []
-
-[10]
-
-LaTeX Warning: Reference `fig:bf_czas' on page 11 undefined on input line 207.
-
-
-Overfull \hbox (2.62946pt too wide) in paragraph at lines 207--208
+[9] [10]
+Overfull \hbox (2.62946pt too wide) in paragraph at lines 216--217
 []\T1/cmr/m/n/12 W pierw-szej ko-lej-no-±ci zba-dano czas wy-ko-na-nia al-go-ry
 tmu prze-gl¡du zu-peª-nego (Brute-
  []
 
+<rys/brute_force.pdf, id=159, 503.5249pt x 394.45117pt>
+File: rys/brute_force.pdf Graphic file (type pdf)
+<use rys/brute_force.pdf>
+Package pdftex.def Info: rys/brute_force.pdf  used on input line 220.
+(pdftex.def)             Requested size: 364.19667pt x 285.31673pt.
+<rys/czas_nn_rnn_vs_n.pdf, id=161, 522.67458pt x 394.45117pt>
+File: rys/czas_nn_rnn_vs_n.pdf Graphic file (type pdf)
+<use rys/czas_nn_rnn_vs_n.pdf>
+Package pdftex.def Info: rys/czas_nn_rnn_vs_n.pdf  used on input line 231.
+(pdftex.def)             Requested size: 364.19667pt x 274.85599pt.
+[11 <./rys/brute_force.pdf>] [12 <./rys/czas_nn_rnn_vs_n.pdf>]
+File: rys/czas_nn_rnn_vs_n.pdf Graphic file (type pdf)
+<use rys/czas_nn_rnn_vs_n.pdf>
+Package pdftex.def Info: rys/czas_nn_rnn_vs_n.pdf  used on input line 251.
+(pdftex.def)             Requested size: 364.19667pt x 274.85599pt.
+ [13]
+<rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf, id=270, 617.64503pt x 394
+.85895pt>
+File: rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf Graphic file (type pd
+f)
+<use rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf>
+Package pdftex.def Info: rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf  u
+sed on input line 260.
+(pdftex.def)             Requested size: 364.19667pt x 232.8322pt.
+ [14 <./rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf>]
+<rys/rand_wszystkie_instancje_calosc_minuty.pdf, id=341, 722.7pt x 433.62pt>
+File: rys/rand_wszystkie_instancje_calosc_minuty.pdf Graphic file (type pdf)
+<use rys/rand_wszystkie_instancje_calosc_minuty.pdf>
+Package pdftex.def Info: rys/rand_wszystkie_instancje_calosc_minuty.pdf  used o
+n input line 272.
+(pdftex.def)             Requested size: 364.19667pt x 218.51653pt.
+<rys/rand_n14_0_do_1000_us.png, id=342, 722.7pt x 433.62pt>
+File: rys/rand_n14_0_do_1000_us.png Graphic file (type png)
+<use rys/rand_n14_0_do_1000_us.png>
+Package pdftex.def Info: rys/rand_n14_0_do_1000_us.png  used on input line 279.
 
-! LaTeX Error: Unknown float option `H'.
-
-See the LaTeX manual or LaTeX Companion for explanation.
-Type  H <return>  for immediate help.
- ...                                              
-                                                  
-l.209 \begin{figure}[H]
-                       
-Option `H' ignored and `p' used.
-
-! Undefined control sequence.
-l.211 	\includegraphics
-                       [width=0.8\textwidth]{rys/brute_force_czas_vs_n.pdf}
-The control sequence at the end of the top line
-of your error message was never \def'ed. If you have
-misspelled it (e.g., `\hobx'), type `I' and the correct
-spelling (e.g., `I\hbox'). Otherwise just continue,
-and I'll forget about whatever was undefined.
-
-! Missing number, treated as zero.
-<to be read again> 
-                   ]
-l.211 	\includegraphics[width=0.8\textwidth]
-                                            {rys/brute_force_czas_vs_n.pdf}
-A number should have been here; I inserted `0'.
-(If you can't figure out why I needed to see a number,
-look up `weird error' in the index to The TeXbook.)
-
-! Illegal unit of measure (pt inserted).
-<to be read again> 
-                   ]
-l.211 	\includegraphics[width=0.8\textwidth]
-                                            {rys/brute_force_czas_vs_n.pdf}
-Dimensions can be in units of em, ex, in, pt, pc,
-cm, mm, dd, cc, nd, nc, bp, or sp; but yours is a new one!
-I'll assume that you meant to say pt, for printer's points.
-To recover gracefully from this error, it's best to
-delete the erroneous units; e.g., type `2' to delete
-two letters. (See Chapter 27 of The TeXbook.)
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.211 ...egraphics[width=0.8\textwidth]{rys/brute_
-                                                  force_czas_vs_n.pdf}
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Extra }, or forgotten $.
-l.211 ...textwidth]{rys/brute_force_czas_vs_n.pdf}
-                                                  
-I've deleted a group-closing symbol because it seems to be
-spurious, as in `$x}$'. But perhaps the } is legitimate and
-you forgot something else, as in `\hbox{$x}'. In such cases
-the way to recover is to insert both the forgotten and the
-deleted material, e.g., by typing `I$}'.
-
-! Missing $ inserted.
-<inserted text> 
-                $
-l.212 ...-Force w funkcji rozmiaru instancji $N$.}
-                                                  
-I've inserted a begin-math/end-math symbol since I think
-you left one out. Proceed, with fingers crossed.
-
-! Missing } inserted.
-<inserted text> 
-                }
-l.214 \end{figure}
-                  
-I've inserted something that you may have forgotten.
-(See the <inserted text> above.)
-With luck, this will get me unwedged. But if you
-really didn't forget anything, try typing `2' now; then
-my insertion and my current dilemma will both disappear.
-
-
-LaTeX Warning: Reference `fig:nn_rnn_czas' on page 11 undefined on input line 2
-18.
-
-
-LaTeX Warning: Reference `tab:czasy' on page 11 undefined on input line 227.
-
-
-LaTeX Warning: Reference `fig:nn_rnn_dokladnosc' on page 11 undefined on input 
-line 238.
-
-
-LaTeX Warning: Reference `fig:rand_raw' on page 11 undefined on input line 249.
-
-
-
-LaTeX Warning: Reference `fig:rand_box' on page 11 undefined on input line 249.
-
-
-[11]
-
-LaTeX Warning: Reference `tab:rand_micro' on page 12 undefined on input line 27
-1.
-
-
-LaTeX Warning: Reference `tab:rand_macro' on page 12 undefined on input line 27
-1.
-
-[12]
-Overfull \hbox (4.8156pt too wide) in paragraph at lines 304--305
+(pdftex.def)             Requested size: 364.19667pt x 218.51653pt.
+ [15 <./rys/rand_wszystkie_instancje_calosc_minuty.pdf>]
+<rys/rand_n14_1_do_100_ms.png, id=413, 722.7pt x 433.62pt>
+File: rys/rand_n14_1_do_100_ms.png Graphic file (type png)
+<use rys/rand_n14_1_do_100_ms.png>
+Package pdftex.def Info: rys/rand_n14_1_do_100_ms.png  used on input line 288.
+(pdftex.def)             Requested size: 364.19667pt x 218.51653pt.
+<rys/rand_n14_100_do_1000_ms.png, id=414, 722.7pt x 433.62pt>
+File: rys/rand_n14_100_do_1000_ms.png Graphic file (type png)
+<use rys/rand_n14_100_do_1000_ms.png>
+Package pdftex.def Info: rys/rand_n14_100_do_1000_ms.png  used on input line 29
+5.
+(pdftex.def)             Requested size: 364.19667pt x 218.51653pt.
+ [16 <./rys/rand_n14_0_do_1000_us.png> <./rys/rand_n14_1_do_100_ms.png>]
+<rys/rand_n14_1_do_60_s.png, id=423, 722.7pt x 433.62pt>
+File: rys/rand_n14_1_do_60_s.png Graphic file (type png)
+<use rys/rand_n14_1_do_60_s.png>
+Package pdftex.def Info: rys/rand_n14_1_do_60_s.png  used on input line 302.
+(pdftex.def)             Requested size: 364.19667pt x 218.51653pt.
+ [17 <./rys/rand_n14_100_do_1000_ms.png> <./rys/rand_n14_1_do_60_s.png>]
+Overfull \hbox (4.8156pt too wide) in paragraph at lines 322--323
 \T1/cmr/m/n/12 uru-cha-mia-nia me-tody za-chªan-nej z ka»-dego mo»-li-wego wier
 z-choªka star-to-wego (RNN)
  []
 
-[13] [14] (./karol_gasior_280913.aux)
+[18] [19] [20] (./karol_gasior_280913.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
 Package rerunfilecheck Info: File `karol_gasior_280913.out' has not changed.
-(rerunfilecheck)             Checksum: FC2BD63324487F52EE95655F8A1C190C;5195.
+(rerunfilecheck)             Checksum: 6FC236955BE84E7F2EEA497AA3555D76;4889.
  ) 
 Here is how much of TeX's memory you used:
- 12067 strings out of 474222
- 198628 string characters out of 5748733
- 1935975 words of memory out of 5000000
- 34109 multiletter control sequences out of 15000+600000
- 575901 words of font info for 84 fonts, out of 8000000 for 9000
+ 16984 strings out of 474222
+ 335492 string characters out of 5748733
+ 1937975 words of memory out of 5000000
+ 38942 multiletter control sequences out of 15000+600000
+ 576578 words of font info for 86 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 75i,7n,79p,688b,592s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 75i,8n,80p,688b,974s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi12.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.pfb></usr/share/texli
@@ -623,10 +688,10 @@ pe1/public/cm-super/sfbx2074.pfb></usr/share/texmf/fonts/type1/public/cm-super/
 sfrm1200.pfb></usr/share/texmf/fonts/type1/public/cm-super/sfrm1440.pfb></usr/s
 hare/texmf/fonts/type1/public/cm-super/sfti1200.pfb></usr/share/texmf/fonts/typ
 e1/public/cm-super/sftt1200.pfb>
-Output written on karol_gasior_280913.pdf (14 pages, 284629 bytes).
+Output written on karol_gasior_280913.pdf (20 pages, 732323 bytes).
 PDF statistics:
- 266 PDF objects out of 1000 (max. 8388607)
- 216 compressed objects within 3 object streams
- 44 named destinations out of 1000 (max. 500000)
- 153 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 532 PDF objects out of 1000 (max. 8388607)
+ 270 compressed objects within 3 object streams
+ 59 named destinations out of 1000 (max. 500000)
+ 185 words of extra memory for PDF output out of 10000 (max. 10000000)
 

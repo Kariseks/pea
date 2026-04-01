@@ -9,6 +9,13 @@
 \usepackage{amssymb}              % Symbole matematyczne (np. nieskończoność)
 \usepackage{geometry}             % Ustawienia marginesów
 \usepackage{csvsimple}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{siunitx}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{booktabs} % Wymagane przez pandas.to_latex()
+\usepackage{textcomp} % Dla symbolu mikrona
 \geometry{
 	a4paper,
 	left=2.5cm,
@@ -23,15 +30,16 @@
 \setlength{\parskip}{0.5em}       % Dodatkowy odstęp między akapitami
 
 % --- DANE DO STRONY TYTUŁOWEJ ---
-\title{\textbf{Sprawozdanie z projektu nr 1 - PEA} \\ \large Asymetryczny Problem Komiwojażera (ATSP)}
-\author{Twoje Imię i Nazwisko / Nr albumu}
+\title{\textbf{Sprawozdanie z projektu nr 1} \\ \large Asymetryczny Problem Komiwojażera (ATSP)
+\\ \large Projektowanie Efektywnych algorytmów}
+\author{Karol Gąsior / 280913}
 \date{\today} 
 
 % --- POCZĄTEK WŁAŚCIWEGO DOKUMENTU ---
 \begin{document}
 	
 	\maketitle % Generuje tytuł, autora i datę
-	
+	\newpage
 	\tableofcontents % Automatyczny spis treści
 	\newpage
 	
@@ -143,7 +151,7 @@
 	\subsection{Implementacja algorytmu losowego}
 	Funkcja \texttt{tsp\_random} ma za zadanie działać nieprzerwanie aż do momentu zgłoszenia żądania zatrzymania przez \texttt{std::stop\_token}. Za generowanie pseudolosowości odpowiada wysoce wydajny generator Mersenne Twister (\texttt{std::mt19937}), inicjalizowany za pomocą ziarna pochodzącego z entropii sprzętowej systemu (\texttt{std::random\_device}).
 	
-	Do tasowania miast wykorzystano klasyczny i optymalny algorytm Fishera-Yatesa, zaimplementowany wewnątrz głównej pętli \texttt{while(true)}. Złożoność pojedynczego przetasowania wynosi $O(N)$. Podobnie jak w przeglądzie zupełnym, tasowaniu podlega wyłączone sub-pasmo wektora od indeksu $1$ do $N-1$, ponieważ miasto startowe musi pozostać niezmienione. Po każdym przetasowaniu następuje ewaluacja wagi grafu i ewentualne nadpisanie struktury \texttt{out\_result}.
+	Do tasowania miast wykorzystano klasyczne generowanie porządku leksykalnego, zaimplementowany wewnątrz głównej pętli \texttt{while(true)}. Złożoność pojedynczego przetasowania wynosi $O(N)$. Po każdym przetasowaniu następuje ewaluacja wagi grafu i ewentualne nadpisanie struktury \texttt{out\_result}.
 	
 	\subsection{Implementacja algorytmów zachłannych (NN oraz RNN)}
 	Główna logika Nearest Neighbour znajduje się w wydzielonej metodzie \texttt{tsp\_nn\_wew}. 
@@ -159,30 +167,31 @@
 	
 	\vspace{1em}
 	\noindent\textbf{1. Konfiguracja środowiska testowego i mechanika pomiarów:} \\
-	Wszystkie testy wykonane zostaną na spójnym środowisku sprzętowym, aby zagwarantować powtarzalność i porównywalność wyników. W środowisku programistycznym Qt Creator program przed wykonaniem testów wydajnościowych zostanie skompilowany w docelowej konfiguracji \textbf{Release}. Krok ten jest kluczowy do uruchomienia flag i optymalizacji kompilatora, co gwarantuje miarodajność wyników pomiaru czasu dla złożonych obliczeń. Pomiary będą dokonywane z wykorzystaniem biblioteki \texttt{<chrono>} za pomocą wysokiej rozdzielczości zegara monotonicznego \texttt{high\_resolution\_clock}. 
+	\indent Wszystkie testy wykonane zostaną na spójnym środowisku sprzętowym, aby zagwarantować powtarzalność i porównywalność wyników. W środowisku programistycznym Qt Creator program przed wykonaniem testów wydajnościowych zostanie skompilowany w docelowej konfiguracji \textbf{Release}. Krok ten jest kluczowy do uruchomienia flag i optymalizacji kompilatora, co gwarantuje miarodajność wyników pomiaru czasu dla złożonych obliczeń. Pomiary będą dokonywane z wykorzystaniem biblioteki \texttt{<chrono>} za pomocą wysokiej rozdzielczości zegara monotonicznego \texttt{high\_resolution\_clock}. 
 	
 	\vspace{1em}
 	\noindent\textbf{2. Struktura danych wejściowych i próbkowanie uśredniające:} \\
-	Pomiary przeprowadzone zostaną dla instancji problemów wczytywanych z plików tekstowych oraz losowo generowanych instancji. Zgodnie z wymaganiami projektowymi, testy obejmą minimum 7 zróżnicowanych, reprezentatywnych wielkości problemu $N$. Z uwagi na radykalnie różne klasy złożoności, wartości $N$ będą dobierane osobno:
-	\begin{itemize}
-		\item \textbf{Dla Brute-Force:} Oczekiwane skale problemu to wartości niewielkie, na których funkcja silni wykazuje dramatyczny przyrost czasu, np. $N \in \{5, 8, 10, 11, 12, 13, 14\}$.
-		\item \textbf{Dla algorytmów przybliżonych (RAND, NN, RNN):} Ponieważ są to metody z czasem wielomianowym bądź stochastycznym, pomiary czasu przyjmą wielokrotnie wyższe pułapy instancji wejściowych, np. $N \in \{10, 50, 100, 250, 500, 750, 1000, 2500\}$.
-	\end{itemize}
+	\indent Pomiary przeprowadzone zostaną dla instancji problemów wczytywanych z plików tekstowych udostępnionych w ramach TSPLIB oraz losowo generowanych instancji zapisanych w formacie TSPLIB. Zgodnie z wymaganiami projektowymi, testy obejmą minimum 7 zróżnicowanych, reprezentatywnych wielkości problemu $N$. Z uwagi na dużą złożoność obliczeniową algorytmu Brute Force, wartości $N \in \{5, 8, 10, 11, 12, 13, 14\}$.
+
 	W celu zniwelowania błędu pomiarowego wynikającego z ingerencji systemu operacyjnego, dla danego rozmiaru $N$ test wydajnościowy zostanie zwielokrotniony (wykonany dla różnych wygenerowanych map o danym rozmiarze lub w pętli dla jednej instancji), a do finalnego sprawozdania trafią wyłącznie wartości uśrednione.
 	
 	\vspace{1em}
 	\noindent\textbf{3. Poszukiwanie granicy wykonania w ,rozsądnym czasie'':} \\
-	Ważnym punktem eksperymentu będzie wyznaczenie dla każdej z czterech metod maksymalnego rozmiaru instancji grafu wejściowego $N_{max}$, dla którego program jest w stanie zwrócić kompletne rozwiązanie w założonym ,,rozsądnym czasie'', który zdefiniowano na przedział od 10 do 30 minut. Doświadczenie to ukaże barierę skalowalności metod dokładnych.
+	\indent Ważnym punktem eksperymentu będzie wyznaczenie dla każdej z czterech metod maksymalnego rozmiaru instancji grafu wejściowego $N_{max}$, dla którego program jest w stanie zwrócić kompletne rozwiązanie w założonym ,,rozsądnym czasie'', który zdefiniowano na przedział od 10 do 30 minut. Doświadczenie to ukaże barierę skalowalności metod dokładnych.
 	
 	\vspace{1em}
 	\noindent\textbf{4. Ewaluacja błędu względnego rozwiązań aproksymowanych:} \\
-	Z racji faktu, iż algorytmy RAND, NN oraz RNN nie gwarantują odnalezienia rozwiązania najkrótszego w grafie, obliczona zostanie metryka błędu względnego $\delta$. Wzór wykorzystywany w analizie jakościowej:
+	\indent Z racji faktu, iż algorytmy RAND, NN oraz RNN nie gwarantują odnalezienia rozwiązania najkrótszego w grafie, obliczona zostanie metryka błędu względnego $\delta$. Wzór wykorzystywany w analizie jakościowej:
 	$$ \delta = \frac{C_{heur} - C_{opt}}{C_{opt}} \cdot 100\% $$
 	gdzie $C_{heur}$ to całkowity koszt ścieżki wyznaczony przez dany algorytm przybliżony, natomiast $C_{opt}$ to globalne optymalne rozwiązanie (pozyskane z analizy dokonanej za pomocą przeglądu zupełnego lub podane jako pewnik pochodzący z ogólnodostępnych baz).
 	
 	\vspace{1em}
 	\noindent\textbf{5. Analiza parametryczna algorytmów:} \\
-	W przypadku algorytmu w pełni losowego (RAND), zbadana zostanie krzywa poprawy jakości wyznaczonej ścieżki (spadek błędu względnego $\delta$) w funkcji zadanego z góry reżimu czasowego. Analiza odpowie na pytanie, czy dwukrotne lub dziesięciokrotne zwiększenie budżetu czasowego wpłynie na optymalizację trasy. Wyniki eksperymentów zostaną zwizualizowane za pomocą dedykowanych wykresów liniowych i słupkowych.
+	\indent W przypadku algorytmu w pełni losowego (RAND), zbadana zostanie krzywa poprawy jakości wyznaczonej ścieżki (spadek błędu względnego $\delta$) w funkcji zadanego z góry reżimu czasowego. Analiza odpowie na pytanie, czy dwukrotne lub dziesięciokrotne zwiększenie budżetu czasowego wpłynie na optymalizację trasy. Wyniki eksperymentów zostaną zwizualizowane za pomocą dedykowanych wykresów liniowych.
+	
+	Badania zmiany dokładności wyznaczania ścieżki optymalnej wykonano dla intancji $N$ = 14 w zakresie czasowym od 10us do 5 minut.
+	
+
 	
 	
 	
@@ -208,89 +217,98 @@ W pierwszej kolejności zbadano czas wykonania algorytmu przeglądu zupełnego (
 
 \begin{figure}[H]
 	\centering
-	\includegraphics[width=0.8\textwidth]{rys/brute_force_czas_vs_n.pdf}
+	\includegraphics[width=0.8\textwidth]{rys/brute_force.pdf}
 	\caption{Czas obliczeń algorytmu Brute-Force w funkcji rozmiaru instancji $N$.}
 	\label{fig:bf_czas}
 \end{figure}
 
-Jak można zauważyć na powyższym wykresie, czas wykonania przeglądu zupełnego rośnie w sposób drastyczny. Potwierdza to teoretyczną złożoność $O(N!)$. Dla małych wartości $N$ (np. od 5 do 10) czas jest ułamkiem sekundy, jednak po przekroczeniu pewnego progu krzywa staje się niemal pionowa, co czyni ten algorytm nieużytecznym dla większych problemów.
+Jak można zauważyć na powyższym wykresie, czas wykonania przeglądu zupełnego rośnie w sposób drastyczny. Potwierdza to teoretyczną złożoność $O(N!)$. Dla małych wartości $N$ (do 12) czas jest ułamkiem sekundy, jednak po przekroczeniu pewnego progu krzywa staje się niemal pionowa, co czyni ten algorytm nieużytecznym dla większych problemów.
 
 Zupełnie inaczej prezentuje się charakterystyka algorytmów zachłannych (Nearest Neighbour oraz Repetitive Nearest Neighbour), co przedstawiono na Rysunku \ref{fig:nn_rnn_czas}.
 
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{rys/czas_nn_rnn_vs_n.pdf}
-%	\caption{Porównanie czasu obliczeń algorytmów heurystycznych NN i RNN.}
-%	\label{fig:nn_rnn_czas}
-%\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/czas_nn_rnn_vs_n.pdf}
+	\caption{Porównanie czasu obliczeń algorytmów heurystycznych NN i RNN.}
+	\label{fig:nn_rnn_czas}
+\end{figure}
 
-Czasy wykonania obu heurystyk rosną wielomianowo, co pozwala na rozwiązywanie instancji o wiele większych niż w przypadku algorytmu dokładnego. Widać wyraźnie, że RNN, iterujący po każdym wierzchołku startowym, jest wolniejszy od klasycznego NN, jednak dla badanych wielkości $N \le 14$ czasy obu metod nadal pozostają na poziomie ułamków sekund. Szczegółowe wartości liczbowe dla algorytmów deterministycznych zebrano w Tabeli \ref{tab:czasy}.
+Czasy wykonania obu heurystyk rosną wielomianowo, co pozwala na rozwiązywanie instancji o wiele większych niż w przypadku algorytmu dokładnego. Widać wyraźnie, że RNN, iterujący po każdym wierzchołku startowym, jest wolniejszy od klasycznego NN, jednak dla badanych wielkości $N \le 21$ czasy obu metod nadal pozostają na poziomie ułamków sekund. Szczegółowe wartości liczbowe dla algorytmów deterministycznych zebrano w Tabeli \ref{tab:czasy}.
 
-%\begin{table}[H]
-%	\centering
-%	\csvautotabular{rys/tabela_czasow.csv}
-%	\caption{Średni czas wykonania [s] dla poszczególnych algorytmów w zależności od rozmiaru instancji $N$.}
-%	\label{tab:czasy}
-%\end{table}
+\begin{table}[H]
+	\centering
+	\caption{Średni czas wykonania \unit{\micro\second} dla poszczególnych algorytmów w zależności od rozmiaru instancji $N$.}
+	\csvautotabular{rys/tabela_czasow.csv}
+	\label{tab:czasy}
+\end{table}
 
 \subsection{Analiza dokładności algorytmów heurystycznych}
 
 Kluczowym aspektem oceny heurystyk jest ich odchylenie od optymalnego kosztu trasy (dokładność). Na Rysunku \ref{fig:nn_rnn_dokladnosc} zestawiono średnią dokładność algorytmów NN oraz RNN z uwzględnieniem czasu ich działania. Dodatkowo naniesiono ciągłą linię reprezentującą uśrednione zachowanie algorytmu losowego (RAND) w początkowych mikrosekundach jego działania.
 
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{rys/dokladnosc_czas_avg_nn_rnn_z_rand.pdf}
-%	\caption{Zależność dokładności od czasu dla NN i RNN na tle początkowej fazy algorytmu RAND.}
-%	\label{fig:nn_rnn_dokladnosc}
-%\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/czas_nn_rnn_vs_n.pdf}
+	\caption{Zależność czasu obliczeń od rozmiaru instancji dla NN i RNN.}
+	\label{fig:nn_rnn_dokladnosc}
+\end{figure}
 
-Wykres ten demonstruje wyższość algorytmu RNN nad NN -- kosztem dłuższego (ale wciąż akceptowalnego) czasu obliczeń, RNN oferuje znacznie wyższą i bardziej stabilną dokładność. 
+Wykres ten demonstruje wyższość algorytmu RNN nad NN -- kosztem dłuższego (ale wciąż akceptowalnego) czasu obliczeń, RNN oferuje znacznie wyższą i bardziej stabilną dokładność.
 
-Ze względu na stochastyczny charakter algorytmu Random Search, zbadano również rozrzut jego dokładności podczas pojedynczych pomiarów (Rysunek \ref{fig:rand_raw} oraz Rysunek \ref{fig:rand_box}).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/dokladnosc_czas_nn_rnn_rand_liniowa_10_50us.pdf}
+	\caption{Zależność dokładności od czasu dla NN i RNN na tle początkowej fazy algorytmu RAND.}
+	\label{fig:nn_rnn_rand_dokladnosc}
+\end{figure}
 
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{rys/dokladnosc_czas_raw_rand.pdf}
-%	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla różnych rozmiarów $N$.}
-%	\label{fig:rand_raw}
-%\end{figure}
-%
-%\begin{figure}[H]
-%	\centering
-%	\includegraphics[width=0.8\textwidth]{rys/stabilnosc_rand.pdf}
-%	\caption{Wykres pudełkowy (Boxplot) ilustrujący stabilność wyników algorytmu RAND dla poszczególnych $N$.}
-%	\label{fig:rand_box}
-%\end{figure}
+Na Rysunek \ref{fig:nn_rnn_rand_dokladnosc} widać rozrzut dokładności dla różnych rozmiarów instancji. Ponieważ nie różnicowano instancji w ramach jednego rozmiaru nie widać rozrzutu dokładności jak dla algorytmu rand. Ale widać, że dokładność jest całkowicie losowa dla danego rozmiaru instancji, zaś osiągnięcie optymalnej ścieżki jest całkowicie przypadkowe. Niestey nie udało się uzyskać większej ilości punktów pomiarowyh dla algorytmu losowego, ze względu na przyjęta strategie ograniczania czasu obliczeń oraz ograniczeina systemowe.
+ 
 
-Z powyższych wizualizacji wynika, że rozrzut wyników metody RAND jest ogromny. Dla najmniejszych instancji (np. $N=5$) losowe tasowanie często trafia w optimum (100\% dokładności). Jednak wraz ze wzrostem rozpiętości instancji, szansa na wylosowanie dobrej ścieżki maleje, a mediana dokładności (czerwona linia na wykresie pudełkowym) drastycznie spada.
+Ze względu na stochastyczny charakter algorytmu losowego, zbadano również rozrzut jego dokładności podczas pojedynczych pomiarów (Rysunek \ref{fig:rand_raw} do Rysunek \ref{fig:rand_1_60s}).
 
-\subsection{Szczegółowa analiza agregacyjna algorytmu RAND}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/rand_wszystkie_instancje_calosc_minuty.pdf}
+	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla różnych rozmiarów $N$.}
+	\label{fig:rand_raw}
+\end{figure}
 
-Aby dokładniej prześledzić wpływ czasu na ewolucję rozwiązania stochastycznego, dokonano próbkowania wyników algorytmu RAND na dwóch płaszczyznach czasowych: w skali mikro (pierwsze ułamki sekund) oraz makro (od kilku sekund do kilku minut).
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/rand_n14_0_do_1000_us.png}
+	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla $N=14$.}
+	\label{fig:rand_raw1}
+\end{figure}
 
-W Tabeli \ref{tab:rand_micro} zaprezentowano zachowanie algorytmu w przedziale od 10 do 50 mikrosekund. Z kolei Tabela \ref{tab:rand_macro} ukazuje średnią dokładność przy długotrwałym działaniu (agregacja co 5 sekund, a następnie co minutę).
 
-%%\begin{table}[H]
-%%	\centering
-%%	\resizebox{\textwidth}{!}{
-%%		\csvautotabular{rys/tabela_rand_micro.csv}
-%	}
-%	\caption{Dokładność algorytmu RAND [\%] w początkowej fazie działania (przedziały rzędu mikrosekund).}
-%	\label{tab:rand_micro}
-%\end{table}
-%
-%%\begin{table}[H]
-%%	\centering
-%%	\resizebox{\textwidth}{!}{
-%%		\csvautotabular{rys/tabela_rand_macro.csv}
-%%	}
-%%	\caption{Dokładność algorytmu RAND [\%] w długich przedziałach czasowych (od sekund do minut).}
-%%	\label{tab:rand_macro}
-%%\end{table}
 
-Dane te potwierdzają, że nadanie algorytmowi losowemu gigantycznego budżetu czasowego pozwala mu stopniowo odnajdywać coraz lepsze rozwiązania, jednak proces ten jest wysoce nieefektywny i nie gwarantuje zbieżności do globalnego optimum dla dużych $N$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/rand_n14_1_do_100_ms.png}
+	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla $N=14$.}
+	\label{fig:rand_raw2}
+\end{figure}
 
-% ---------------------------------------------------------------------------------------------------------------------
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/rand_n14_100_do_1000_ms.png}
+	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla $N=14$.}
+	\label{fig:rand_raw3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{rys/rand_n14_1_do_60_s.png}
+	\caption{Rozkład surowych pomiarów dokładności algorytmu RAND w przestrzeni czasu dla $N=14$.}
+	\label{fig:rand_1_60s}
+\end{figure}
+
+Z powyższych wizualizacji wynika, że rozrzut wyników metody RAND jest ogromny. Dla najmniejszych instancji (np. $N=5$) losowe tasowanie często trafia w optimum (100\% dokładności). Jednak wraz ze wzrostem rozpiętości instancji, szansa na wylosowanie dobrej ścieżki maleje. Widać rozrzut dokładności dla niemal całego zakresu czasu losowań na poziomie około 20\%. Ponieważ przeprowadzono dziesiątki tysięcy pomiarów zdarzyły się pojedyncze pomiary które trafiły w optimum.
+
+Zauważalny jest skok zdokładnności około 90\% odrazu do potimum. Brakuje oczywiście ciągłości od 0 do 40\%-60\% ,co wynika z samego charakteru algorytmu oraz stosunkowo łatwego osiągnięcia dokładności rzędu 40\% (wystarczy zaledwie kilkaset losowań). 
+
+
 
 \section{Podsumowanie i wnioski}
 
@@ -308,16 +326,39 @@ Przeprowadzone eksperymenty oraz implementacja algorytmów dla Asymetrycznego Pr
 
 Podsumowując, do rozwiązywania problemów klasy ATSP na dużą skalę w rzeczywistych warunkach niezbędne jest odrzucenie metod dokładnych na rzecz zaawansowanych algorytmów przybliżonych (np. metaheurystyk), których wstępną bazę może stanowić algorytm oparty na zasadzie Repetitive Nearest Neighbour.	
 	
+\newpage
+
+\begin{table}[H]
+	\centering
+	\caption{Średni czas wykonania [s] dla algorytmu brute force w zależności od od rozmiaru instancji $N$.}
+	\csvautotabular{rys/tabela_czasow_bf.csv}
+	\label{tab:czasy_bf}
+\end{table}
 	
+%\begin{table}[H]
+%	\centering
+%	\caption{Rozrzut dokładności algorytmu losowego $N$.}
+%	\csvautotabular{rys/tabela_rand_14_rozrzut.csv}
+%	\label{tab:czasy_rand_rozrzut}
+%\end{table}
 	
+%\begin{table}[H]
+%	\centering
+%	\caption{Średni dokładność [\%] dla algorytmu losowego w zależnosći od rozmiaru instancji $N$.}
+%	\csvautotabular{rys/tabela_rand_macro.csv}
+%	\label{tab:czasy_rand_rozrzut}
+%\end{table}
+
 	
+%\begin{table}[H]
+%	\centering
+%	\caption{Średni czas wykonania [s] dla poszczególnych algorytmów w zależności od rozmiaru instancji $N$.}
+%	\csvautotabular{rys/tabela_rand_micro.csv}
+%
+%	\label{tab:czasy_rand_rozrzut}
+%\end{table}
 	
-	
-	
-	
-	
-	
-	
+
 	
 	
 \end{document}
