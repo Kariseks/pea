@@ -13,4 +13,6 @@ void tsp_nn(std::stop_token stoken, const Array& matrix, Result& out_result);
 void tsp_rnn(std::stop_token stoken, const Array& matrix, Result& out_result);
 T calculateTourCost(Wektor& path, const Array & matrix);
 bool verifyVisited(Wektor& path);
+void tsp_random_iter(std::size_t count, const Array& matrix, Result& out_result);
+
 #endif // NIC_H

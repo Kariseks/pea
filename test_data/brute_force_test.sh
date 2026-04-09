@@ -8,7 +8,7 @@ REPETITIONS=100
 MODE=0
 IN_FILE_PATH='./generowane/'
 N_START=5
-N_STOP=21
+N_STOP=14
 
 # 2. Obliczanie liczby wątków (Liczba CPU - 2)
 CPU_CORES=$(nproc)

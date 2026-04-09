@@ -13,7 +13,7 @@ atsp_solutions = {
     "ftv47": (48, 1776),
     "ftv55": (56, 1608),
     "ftv64": (65, 1839),
-    "ftv70": (71, 1950),  # UWAGA: Zmienione na 1950 zgodnie z tabelą
+    "ftv70": (71, 1950),
     "ftv90": (91, 1579),
     "ftv100": (101, 1788),
     "ftv110": (111, 1958),

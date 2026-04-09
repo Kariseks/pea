@@ -81,7 +81,6 @@ void tsp_brute_force(std::stop_token stoken, const Array& matrix, Result& out_re
 
     } while (nastepna_permutacja(current_path, n));
 }
-//=====================================================================================================================
 void tsp_random(std::stop_token stoken, const Array& matrix, Result& out_result) {
     // Uzyskujemy rozmiar z Twojej klasy Array
     std::size_t n = const_cast<Array&>(matrix).getSize();
@@ -134,6 +133,54 @@ void tsp_random(std::stop_token stoken, const Array& matrix, Result& out_result)
         }
     }
 }
+void tsp_random_iter(std::size_t count, const Array& matrix, Result& out_result) {
+    // Uzyskujemy rozmiar z Twojej klasy Array
+    std::size_t n = const_cast<Array&>(matrix).getSize();
+
+    if (n < 2) return;
+
+    // 1. Przygotowanie początkowej ścieżki
+    Wektor current_path(n);
+    for (std::size_t i = 0; i < n; ++i) {
+        current_path[i] = static_cast<int>(i);
+    }
+
+    out_result.cost = std::numeric_limits<int>::max();
+
+    // Inicjalizacja profesjonalnego generatora liczb losowych (Mersenne Twister)
+    std::random_device rd;
+    std::mt19937 rng(rd());
+
+    // 2. Główna pętla algorytmu losowego (działa w nieskończoność aż do timeoutu)
+    while (--count) {
+        // 3. Losowe przetasowanie miast (Algorytm Fishera-Yatesa)
+        // Podobnie jak w BF, miasto na indeksie 0 zostawiamy w spokoju (nie ruszamy go),
+        // tasujemy tylko miasta od indeksu 1 do n-1.
+        for (std::size_t i = n - 1; i > 1; --i) {
+            std::uniform_int_distribution<std::size_t> dist(1, i);
+            std::size_t j = dist(rng);
+            std::swap(current_path[i], current_path[j]);
+        }
+
+        // 4. Obliczanie kosztu wylosowanej ścieżki
+        T current_cost = 0;
+
+        for (std::size_t i = 0; i < n - 1; ++i) {
+            current_cost += const_cast<Array&>(matrix).get(current_path[i], current_path[i+1]);
+        }
+        // Powrót do początku
+        current_cost += const_cast<Array&>(matrix).get(current_path[n-1], current_path[0]);
+
+        // 5. Aktualizacja najlepszego wyniku
+        if (current_cost < out_result.cost) {
+            out_result.cost = current_cost;
+
+            // Kopiujemy najlepszą znalezioną do tej pory losową ścieżkę
+            out_result.path = current_path;
+        }
+    }
+}
+
 //=====================================================================================================================
 void tsp_nn(std::stop_token stoken, const Array& matrix, Result& out_result) {
     tsp_nn_wew(stoken,matrix,out_result, 0);

@@ -2,29 +2,31 @@
 
 # 1. Konfiguracja - Tablica MUSI być zdefiniowana w nawiasach, elementy oddzielone spacją
 PROGRAM="../pea_project/build/Desktop_Qt_6_10_0-release/pea_project"
-MAX_TIME=10
-ALGO_ID=2
+MAX_TIME=1
+ALGOS=(2 3 4)
 REPETITIONS=5
 MODE=0
-IN_FILE_PATH='./TSPLIB/'
+IN_FILE_PATH='./test_data/'
 
 # Poprawiona definicja tablicy
 FILE_ENDS=(
+    "5.atsp" "6.atsp" "7.atsp" "8.atsp" "9.atsp" "10.atsp" "11.atsp" "12.atsp" "13.atsp" "14.atsp"	
     "br17.atsp" "ftv33.atsp" "ftv47.atsp" "kro124p.atsp" "rbg403.atsp"
     "ft53.atsp" "ftv35.atsp" "ftv55.atsp" "p43.atsp" "rbg443.atsp"
-    "ft70.atsp" "ftv38.atsp" "ftv64.atsp" "rbg323.atsp" "ry48p.atsp"
+    "ft70.atsp" "ftv38.atsp" "ftv64.atsp" "rbg323.atsp" 
     "ftv170.atsp" "ftv44.atsp" "ftv70.atsp" "rbg358.atsp"
 )
-
+#-----------------------------------------------------------------
 # 2. Obliczanie liczby wątków
 CPU_CORES=$(nproc)
 THREADS=$((CPU_CORES - 2))
 [ $THREADS -lt 1 ] && THREADS=1
 
 echo "--- Wykryto rdzeni: $CPU_CORES. Używam wątków: $THREADS ---"
+#-----------------------------------------------------------------
 
 # 3. Przygotowanie listy komend
-TEMP_COMMANDS="tasks.tmp"
+TEMP_COMMANDS="tasks.tmp" 
 > "$TEMP_COMMANDS"
 
 # KLUCZOWA ZMIANA: Składnia "${NAZWA[@]}" jest niezbędna do iteracji
@@ -36,7 +38,9 @@ do
     if [ -f "$FILE" ]; then
         for i in $(seq 1 $REPETITIONS)
         do
-            echo "$PROGRAM $MAX_TIME $ALGO_ID $FILE $MODE" >> "$TEMP_COMMANDS"
+            for algo in "${ALGOS[@]}" ; do
+                echo "$PROGRAM $MAX_TIME $algo $FILE $MODE" >> "$TEMP_COMMANDS"
+            done
         done
     else
         echo "Pominięcie: $FILE (brak pliku)"
@@ -51,4 +55,4 @@ xargs -P $THREADS -I {} sh -c "{}" < "$TEMP_COMMANDS"
 rm "$TEMP_COMMANDS"
 
 echo -e "\n--- Wszystkie testy zakończone! ---"
-speaker-test -t sine -f 800 -l 1 & sleep 0.5 && kill -9 $! >> /dev/null
+speaker-test -t sine -f 800 -l 1 & sleep 0.5 && kill -9 $! &> /dev/null

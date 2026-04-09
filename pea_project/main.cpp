@@ -69,6 +69,7 @@ int main(int argc, char ** argv)
                             (algoId == 2) ? "random" :
                             (algoId == 3) ? "nn" :
                             (algoId == 4) ? "rnn" :
+                            (algoId == 5) ? "random" :
                              "brute_force";
         //---- wczytywanie macierzy z pliku -----------------
 
@@ -87,8 +88,10 @@ int main(int argc, char ** argv)
 
         AlgorithmRunner runner;
         bool completed_on_time = false;
-
-        runner.run_with_wall_timeout(std::chrono::seconds(maxTime), algorithm,array, result);
+        if(algoId == 5)
+            runner.run_iterations(maxTime,tsp_random_iter,array, result);
+        else
+            runner.run_with_wall_timeout(std::chrono::seconds(maxTime), algorithm,array, result);
         //--------------------------------------------------------------------------
         //koniec czesci wyznaczania optymalnej trasy i kosztu
         //----- dopisanie/zapis wynikow testu do piku-----------------------------------------------------------------------------

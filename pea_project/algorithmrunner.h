@@ -61,6 +61,15 @@ public:
 
 
     }
+
+template <typename Callable, typename... Args>
+void run_iterations(std::size_t iterations, Callable&& algorithm, Args&&... args)
+{
+    double start_cpu_time = get_current_thread_cpu_time_in_s();
+    algorithm(iterations, std::forward<Args>(args)...);
+    final_cpu_time_in_s = get_current_thread_cpu_time_in_s() - start_cpu_time;
+
+}
 //=================================================================================================================
     double getFinal_cpu_time_in_s() const;
 
