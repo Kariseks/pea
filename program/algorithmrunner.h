@@ -71,7 +71,7 @@ void run(Callable&& algorithm, Args&&... args)
 
     // Wywołujemy algorytm, przekazując stop_token
     //algorithm(stoken, std::forward<Args>(args)...);
-    algorithm( std::forward<Args>(args)...);
+    result = algorithm( std::forward<Args>(args)...);
 
     final_cpu_time_in_s = get_current_thread_cpu_time_in_s() - start_cpu_time;
 }

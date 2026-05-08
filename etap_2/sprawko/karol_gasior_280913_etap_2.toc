@@ -1,0 +1,20 @@
+\babel@toc {polish}{}\relax 
+\contentsline {section}{\numberline {1}Wstęp teoretyczny}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}Algorytm podziału i ograniczeń (Branch and Bound)}{3}{subsection.1.1}%
+\contentsline {section}{\numberline {2}Przykład praktyczny algorytmu B\&B (Depth-First Search) dla $N=3$}{3}{section.2}%
+\contentsline {section}{\numberline {3}Opis implementacji algorytmu i zastosowanych struktur}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Kluczowe struktury danych}{6}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Funkcja obliczająca ograniczenia dla metody B\&B (Algorytm Little'a)}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Złożoność czasowa algorytmu Little'a}{7}{subsubsection.3.2.1}%
+\contentsline {subsection}{\numberline {3.3}Algorytmy przeszukiwań przestrzeni rozwiązań}{8}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Złożoność pamięciowa - liczba węzłów}{8}{subsubsection.3.3.1}%
+\contentsline {section}{\numberline {4}Metodologia badań}{9}{section.4}%
+\contentsline {section}{\numberline {5}Zestaw danych testowych}{9}{section.5}%
+\contentsline {section}{\numberline {6}Wyniki eksperymentów}{10}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Tabela i analiza wydajności}{10}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Maksymalny rozmiar instancji}{13}{subsection.6.2}%
+\contentsline {section}{\numberline {7}Podsumowanie i wnioski końcowe}{14}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Uwagi implementacyjne}{15}{subsection.7.1}%
+\contentsline {section}{\numberline {8}Środowisko testowe}{16}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Specyfikacja sprzętowa}{16}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Środowisko programowe}{16}{subsection.8.2}%

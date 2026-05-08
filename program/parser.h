@@ -2,6 +2,7 @@
 #define PARSER_H
 
 #include <string>
+#include <sstream>
 
 class Parser {
 private:
@@ -22,7 +23,11 @@ public:
     int getAlgorithmId() const;
     std::string getFilePath() const;
     bool isValid() const;
-    int getMode() const;
+    std::string getError() const;
+    //int getMode() const;
+private:
+    static constexpr int arg_num = 3;
+    std::stringstream errorMsg;
 };
 
 #endif // PARSER_H

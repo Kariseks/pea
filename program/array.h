@@ -5,9 +5,9 @@
 
 #include <cstddef>
 
+#include "config.h"
 //todo zastanowic sie nad stalymi macierzami
 namespace pea{
-using T = int;
 
 class Array
 {
@@ -22,7 +22,7 @@ public:
 public:
      T get(std::size_t row, std::size_t col) const;
     void set(T value, std::size_t row, std::size_t col);
-    const std::size_t getSize();
+    const std::size_t getSize() const;
     T* operator[](std::size_t row);
 
 

@@ -74,7 +74,7 @@ T Array::get(std::size_t row, std::size_t col) const { return data_ptr[row*size 
 
 void Array::set(T value, std::size_t row, std::size_t col){ (*this)[row][col] = value;}
 
-const size_t Array::getSize(){ return size; }
+const size_t Array::getSize() const{ return size; }
 
 T * Array::operator[](std::size_t row){ return (data_ptr + size * row);}
 

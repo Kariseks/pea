@@ -5,8 +5,7 @@
 #include "array.h"
 
 
-
-Result bredth_first_search(const pea::Array & matrix);
+Result breadth_first_search(const pea::Array & matrix);
 Result deep_first_search(const pea::Array & matrix);
 Result best_first_search(const pea::Array & matrix);
 

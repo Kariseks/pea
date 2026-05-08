@@ -212,7 +212,7 @@ bool FileHandler_TSPLIB::writeOptTour(const std::string& filename, const int* to
     return true;
 }
 
-bool FileHandler_TSPLIB::saveResult(const std::string & algoName, const std::string & filename, std::size_t size, double cpuTime, const Result &result) const
+bool FileHandler_TSPLIB::saveResult(const string &instanceName, const std::string & algoName, const std::string & filename, std::size_t size, double cpuTime, const Result &result) const
 {
     // 2. Otwarcie pliku w trybie dopisywania (std::ios::app)
     // Jeśli plik nie istnieje, zostanie utworzony. Jeśli istnieje, nowa linia trafi na koniec.
@@ -237,7 +237,8 @@ bool FileHandler_TSPLIB::saveResult(const std::string & algoName, const std::str
     // gdzie 'data' to u Ciebie koszt (result.cost)
     // a 'data_zapisu' to MM:HH DD-MM-RRRR
 
-    file << cpuTime << ";"                   // Kolumna 1: czas (CPU)
+    file << instanceName << ";"
+         << cpuTime << ";"                   // Kolumna 1: czas (CPU)
          << size << ";"                      // Kolumna 2: rozmiar instancji
          << algoName << ";"                  // Kolumna 3: nazwa algorytmu
          << result.cost << ";"               // Kolumna 4: wynik (koszt)

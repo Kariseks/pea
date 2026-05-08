@@ -16,7 +16,13 @@ add_executable(pea_project main.cpp
     etap_2.h etap_2.cpp
     menudisplayer.h menudisplayer.cpp
     doublelista.h doublelista.cpp
-    node.h node.cpp)
+    node_bfs.h node_bfs.cpp
+    config.h
+    stack.h stack.cpp
+    node.h node.cpp
+    nodestack.h nodestack.cpp
+    nodequeue.h nodequeue.cpp
+    nodepriorityqueue.h nodepriorityqueue.cpp)
 
 include(GNUInstallDirs)
 install(TARGETS pea_project
